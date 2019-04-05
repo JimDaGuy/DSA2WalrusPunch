@@ -5,10 +5,13 @@ void Application::InitVariables(void)
 {
 	m_sProgrammer = "James DiGrazia jtd2401@rit.edu";
 
+	//Hide the cursor
+	m_pWindow->setMouseCursorVisible(false);
+
 	//Set the position and target of the camera
 	m_pCameraMngr->SetPositionTargetAndUpward(
-		vector3(0.0f, 0.0f, 100.0f), //Position
-		vector3(0.0f, 0.0f, 99.0f),	//Target
+		vector3(0.0f, 0.0f, 0.0f), //Position
+		vector3(0.0f, 0.0f, -1.0f),	//Target
 		AXIS_Y);					//Up
 
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
@@ -32,8 +35,9 @@ void Application::InitVariables(void)
 			m_pEntityMngr->SetModelMatrix(m4Position);
 		}
 	}
-	m_uOctantLevels = 0;
-	m_uOctantID = 1;
+	m_uOctantLevels = 3;
+	m_uOctantID = 0;
+	m_pRoot = new MyOctree(m_uOctantLevels);
 }
 void Application::Update(void)
 {
