@@ -8,7 +8,12 @@ using namespace Simplex;
 class Balloon
 {
 public:
-	Balloon(vector3 a_color = C_RED);
+	enum BalloonColor
+	{
+		Red,
+		Blue
+	};
+	Balloon(BalloonColor a_color = Red);
 	~Balloon();
 	void MoveTo(vector3 position);
 private:
@@ -17,7 +22,7 @@ private:
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 	std::string m_uniqueID;
-	vector3 color;
+	BalloonColor color;
 };
 
 #endif //__BALLOON_H_

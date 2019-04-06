@@ -2,7 +2,7 @@
 
 int Balloon::IdIterator = -1;
 
-Balloon::Balloon(vector3 a_color)
+Balloon::Balloon(BalloonColor a_color)
 {
 	++IdIterator;
 
@@ -13,7 +13,18 @@ Balloon::Balloon(vector3 a_color)
 
 	std::string idPrefix = "balloon";
 	m_uniqueID = idPrefix + std::to_string(IdIterator);
-	m_pEntityMngr->AddEntity("Balloons\\IronMan.obj", m_uniqueID);
+
+	switch (a_color)
+	{
+	case Red:
+		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
+		break;
+	case Blue:
+		m_pEntityMngr->AddEntity("Balloons\\Blue.obj", m_uniqueID);
+		break;
+	default:
+		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
+	}
 
 	vector3 v3Position = vector3(glm::sphericalRand(34.0f));
 	matrix4 m4Position = glm::translate(v3Position);
