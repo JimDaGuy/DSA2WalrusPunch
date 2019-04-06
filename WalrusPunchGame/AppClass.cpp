@@ -41,17 +41,6 @@ void Application::InitVariables(void)
 	}
 	*/
 
-	// Balloon creation
-	/*
-	Balloon* b1 = new Balloon(Balloon::BalloonColor::Red);
-	vector3 v3Position = vector3(0.0f, 0.0f, -5.0f);
-	b1->MoveTo(v3Position);
-
-	Balloon* b2 = new Balloon(Balloon::BalloonColor::Blue);
-	v3Position = vector3(2.0f, 0.0f, -5.0f);
-	b2->MoveTo(v3Position);
-	*/
-
 	m_BalloonMngr = new BalloonManager(
 		4,
 		vector3(0.0f, -1.0f, -7.5f),

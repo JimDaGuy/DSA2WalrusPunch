@@ -2,35 +2,6 @@
 
 int Balloon::IdIterator = -1;
 
-Balloon::Balloon(BalloonColor a_color)
-{
-	++IdIterator;
-
-	color = a_color;
-
-	m_pMeshMngr = MeshManager::GetInstance();
-	m_pEntityMngr = MyEntityManager::GetInstance();
-
-	std::string idPrefix = "balloon";
-	m_uniqueID = idPrefix + std::to_string(IdIterator);
-
-	switch (a_color)
-	{
-	case Red:
-		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
-		break;
-	case Blue:
-		m_pEntityMngr->AddEntity("Balloons\\Blue.obj", m_uniqueID);
-		break;
-	default:
-		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
-	}
-
-	vector3 v3Position = vector3(glm::sphericalRand(34.0f));
-	matrix4 m4Position = glm::translate(v3Position);
-	m_pEntityMngr->SetModelMatrix(m4Position);
-}
-
 Balloon::Balloon(vector3 a_position, BalloonColor a_color)
 {
 	++IdIterator;
