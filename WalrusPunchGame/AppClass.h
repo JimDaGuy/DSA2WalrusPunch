@@ -12,6 +12,7 @@ Date: 2017/06
 
 #include "MyEntityManager.h"
 #include "MyOctree.h"
+#include "Balloon.h"
 
 namespace Simplex
 {

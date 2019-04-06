@@ -35,6 +35,12 @@ void Application::InitVariables(void)
 			m_pEntityMngr->SetModelMatrix(m4Position);
 		}
 	}
+
+	// Balloon creation
+	Balloon* b1 = new Balloon();
+	vector3 v3Position = vector3(0.0f, 0.0f, -5.0f);
+	b1->MoveTo(v3Position);
+
 	m_uOctantLevels = 3;
 	m_uOctantID = 0;
 	m_pRoot = new MyOctree(m_uOctantLevels);
