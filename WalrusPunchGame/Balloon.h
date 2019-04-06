@@ -14,11 +14,14 @@ public:
 		Blue
 	};
 	Balloon(BalloonColor a_color = Red);
+	Balloon(vector3 a_position, BalloonColor a_color = Red);
+	void Swap(Balloon& other);
 	~Balloon();
 	void MoveTo(vector3 position);
+	MyEntity* GetEntity();
+	vector3 GetPosition();
 private:
 	static int IdIterator;
-	MyEntity* GetEntity();
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 	std::string m_uniqueID;

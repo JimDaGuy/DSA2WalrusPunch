@@ -3,6 +3,9 @@ using namespace Simplex;
 using namespace std;
 void Application::InitVariables(void)
 {
+	// Seed random numbers for the program
+	srand(static_cast <unsigned> (time(0)));
+
 	m_sProgrammer = "James DiGrazia jtd2401@rit.edu";
 
 	//Hide the cursor
@@ -23,6 +26,7 @@ void Application::InitVariables(void)
 #endif
 	int nSquare = static_cast<int>(std::sqrt(uInstances));
 	m_uObjects = nSquare * nSquare;
+	/*
 	uint uIndex = -1;
 	for (int i = 0; i < nSquare; i++)
 	{
@@ -35,8 +39,10 @@ void Application::InitVariables(void)
 			m_pEntityMngr->SetModelMatrix(m4Position);
 		}
 	}
+	*/
 
 	// Balloon creation
+	/*
 	Balloon* b1 = new Balloon(Balloon::BalloonColor::Red);
 	vector3 v3Position = vector3(0.0f, 0.0f, -5.0f);
 	b1->MoveTo(v3Position);
@@ -44,6 +50,19 @@ void Application::InitVariables(void)
 	Balloon* b2 = new Balloon(Balloon::BalloonColor::Blue);
 	v3Position = vector3(2.0f, 0.0f, -5.0f);
 	b2->MoveTo(v3Position);
+	*/
+
+	m_BalloonMngr = new BalloonManager(
+		4,
+		vector3(0.0f, -1.0f, -7.5f),
+		-AXIS_Z,
+		AXIS_X,
+		3.0f,
+		15.0f,
+		7.5f,
+		10,
+		500 // Change this to an actual time later
+	);
 
 	m_uOctantLevels = 3;
 	m_uOctantID = 0;
@@ -65,6 +84,7 @@ void Application::Update(void)
 	// Otherwise use the entity manager's collision check
 	m_pEntityMngr->ClearCollisions();
 
+	m_BalloonMngr->Update();
 
 	if (m_pRoot == nullptr) {
 		m_pEntityMngr->Update();
@@ -86,6 +106,8 @@ void Application::Display(void)
 	if (m_pRoot != nullptr && m_uOctantID == 1) {
 		m_pRoot->Display(C_ORANGE);
 	}
+
+	m_BalloonMngr->DisplayLines(C_BLUE);
 
 	// draw a skybox
 	m_pMeshMngr->AddSkyboxToRenderList();

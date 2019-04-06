@@ -12,7 +12,7 @@ Date: 2017/06
 
 #include "MyEntityManager.h"
 #include "MyOctree.h"
-#include "Balloon.h"
+#include "BalloonManager.h"
 
 namespace Simplex
 {
@@ -24,6 +24,7 @@ class Application
 	uint m_uObjects = 0; //Number of objects in the scene
 	uint m_uOctantLevels = 0; //Number of levels in the octree
 	MyOctree* m_pRoot = nullptr;
+	BalloonManager* m_BalloonMngr = nullptr;
 private:
 	String m_sProgrammer = "James DiGrazia jtd2401@rit.edu"; //programmer
 
