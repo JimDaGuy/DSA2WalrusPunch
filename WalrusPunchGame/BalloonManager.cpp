@@ -34,6 +34,10 @@ BalloonManager::BalloonManager
 
 BalloonManager::~BalloonManager()
 {
+	while (balloonCount > 0) {
+		DestroyBalloon(0);
+	}
+
 	delete[] balloonList;
 	m_pMeshMngr = nullptr;
 	m_pEntityMngr = nullptr;
