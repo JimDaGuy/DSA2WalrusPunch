@@ -13,7 +13,7 @@ void Application::InitVariables(void)
 
 	//Set the position and target of the camera
 	m_pCameraMngr->SetPositionTargetAndUpward(
-		vector3(0.0f, 0.0f, 0.0f), //Position
+		vector3(0.0f, 3.0f, 8.0f), //Position
 		vector3(0.0f, 0.0f, -1.0f),	//Target
 		AXIS_Y);					//Up
 

@@ -50,7 +50,22 @@ void BalloonManager::Update()
 		currentPos.y += .02;
 
 		// Move the balloon left and right
-
+		if (current->getMovingLeft())
+		{
+			currentPos.x -= current->getHorizontalSpeed();
+			current->setHorizontalOffset(current->getHorizontalSpeed() * -1);
+			if (current->getHorizontalOffset() < current->getLeftRightDistance() * -1) {
+				current->setMovingLeft(false);
+			}
+		}
+		else
+		{
+			currentPos.x += current->getHorizontalSpeed();
+			current->setHorizontalOffset(current->getHorizontalSpeed());
+			if (current->getHorizontalOffset() > current->getLeftRightDistance()) {
+				current->setMovingLeft(true);
+			}
+		}
 
 		// If any of the balloons are higher than the maxHeight,
 		if (current->GetPosition().y > lineCenter.y + maxHeight) {
@@ -90,10 +105,24 @@ void BalloonManager::Update()
 		// Reset timer
 		lastBalloonSpawn = currentTime;
 	}
+
+	CheckCollisions();
+
 }
 
 void BalloonManager::CheckCollisions()
 {
+	// Will need to keep track of which entities are balloons / darts for collision resolution
+
+	for (uint i = 0; i < m_pEntityMngr->GetEntityCount(); i++)
+	{
+		for (uint j = i + 1; j < m_pEntityMngr->GetEntityCount(); j++)
+		{
+			MyEntity* entity1 = m_pEntityMngr->GetEntity(i);
+			MyEntity* entity2 = m_pEntityMngr->GetEntity(j);
+			entity1->IsColliding(entity2);
+		}
+	}
 }
 
 void BalloonManager::DisplayLines(vector3 a_color)

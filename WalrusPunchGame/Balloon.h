@@ -20,12 +20,22 @@ public:
 	void MoveTo(vector3 position);
 	MyEntity* GetEntity();
 	vector3 GetPosition();
+	float getHorizontalOffset();
+	void setHorizontalOffset(float offset);
+	float getLeftRightDistance();
+	bool getMovingLeft();
+	void setMovingLeft(bool left);
+	float getHorizontalSpeed();
 private:
 	static int IdIterator;
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 	std::string m_uniqueID;
 	BalloonColor color;
+	float horizontalOffset;
+	float leftRightDistance;
+	bool movingLeft;
+	float horizontalSpeed;
 };
 
 #endif //__BALLOON_H_
