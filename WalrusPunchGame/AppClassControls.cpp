@@ -118,6 +118,10 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			m_uOctantID = - 1;
 			*/
 		break;
+	case sf::Keyboard::T:
+		delete m_BalloonMngr;
+		m_BalloonMngr = nullptr;
+		break;
 	case sf::Keyboard::PageDown:
 		m_uOctantID = 0;
 		/*

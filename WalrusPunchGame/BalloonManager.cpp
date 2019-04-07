@@ -34,9 +34,9 @@ BalloonManager::BalloonManager
 
 BalloonManager::~BalloonManager()
 {
+	delete[] balloonList;
 	m_pMeshMngr = nullptr;
 	m_pEntityMngr = nullptr;
-	delete[] balloonList;
 }
 
 void BalloonManager::Update()
@@ -176,6 +176,8 @@ void BalloonManager::DestroyBalloon(uint a_balloonIndex)
 	for (uint i = 0; i < balloonCount - 1; ++i) {
 		bTempArray[i] = balloonList[i];
 	}
+	
+	delete balloonList[balloonCount - 1];
 
 	if (balloonList) {
 		delete[] balloonList;

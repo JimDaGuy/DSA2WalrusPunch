@@ -73,7 +73,8 @@ void Application::Update(void)
 	// Otherwise use the entity manager's collision check
 	m_pEntityMngr->ClearCollisions();
 
-	m_BalloonMngr->Update();
+	if (m_BalloonMngr != nullptr)
+		m_BalloonMngr->Update();
 
 	if (m_pRoot == nullptr) {
 		m_pEntityMngr->Update();
@@ -96,7 +97,8 @@ void Application::Display(void)
 		m_pRoot->Display(C_ORANGE);
 	}
 
-	m_BalloonMngr->DisplayLines(C_BLUE);
+	if (m_BalloonMngr != nullptr)
+		m_BalloonMngr->DisplayLines(C_BLUE);
 
 	// draw a skybox
 	m_pMeshMngr->AddSkyboxToRenderList();
