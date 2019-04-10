@@ -29,6 +29,7 @@ public:
 	void DisplayLines(vector3 a_color);
 	void CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position);
 	void DestroyBalloon(uint a_balloonIndex);
+	uint WeightedRandom();
 	~BalloonManager();
 private:
 	// Number of lines to be generated
@@ -51,6 +52,8 @@ private:
 	uint msPerBalloonSpawn;
 	// Timestamp is ms from last balloon spawn
 	uint lastBalloonSpawn;
+	// Weights for random gen, highest to lowest
+	std::vector<uint> weights = { 7, 4, 3, 1 };
 
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton

@@ -1,4 +1,7 @@
 #include "BalloonManager.h"
+#include <cstdlib>
+#include <ctime>
+
 
 BalloonManager::BalloonManager
 (
@@ -24,6 +27,7 @@ BalloonManager::BalloonManager
 	balloonMax = a_balloonMax;
 	msPerBalloonSpawn = a_msPerBalloonSpawn;
 	// msSinceLastBalloonSpawn = 0;
+	srand(time(NULL));
 
 	lastBalloonSpawn = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 
@@ -105,7 +109,26 @@ void BalloonManager::Update()
 		balloonPosition += rightwardOffset;
 
 		// Create balloon
-		CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);
+		uint ranNum = WeightedRandom();
+
+		switch (ranNum) {
+		case 1: //Blue
+			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);
+			break;
+		case 2: //Red
+			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			break;
+		case 3: //Green
+			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			break;
+		case 4: //Gold
+			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			break;
+		default:
+			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);
+			break;
+		}
+
 		// Reset timer
 		lastBalloonSpawn = currentTime;
 	}
@@ -189,4 +212,27 @@ void BalloonManager::DestroyBalloon(uint a_balloonIndex)
 
 	balloonList = bTempArray;
 	--balloonCount;
+}
+
+//Generates a random number to decide a balloon. Based off the weights of each color
+uint BalloonManager::WeightedRandom() {
+	/* 
+		Blue: 7
+		Red: 4
+		Green: 3
+		Gold: 1
+		Total: 15
+	*/
+	//Generate a random number that is 1 to the Total Weight (15)
+	uint num = (rand() % 15) + 1;
+
+	//For each weight subtract the rand num by the weight, if = or < 0 then we're done
+	for (uint i = 0; i < weights.size(); i++) {
+		num -= weights[i];
+
+		if (num <= 0)
+			return i + 1;
+	}
+
+	return 1;
 }
