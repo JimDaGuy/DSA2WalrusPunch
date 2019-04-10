@@ -11,7 +11,9 @@ public:
 	enum BalloonColor
 	{
 		Red,
-		Blue
+		Blue,
+		Green,
+		Gold
 	};
 	Balloon(BalloonColor a_color = Red);
 	Balloon(vector3 a_position, BalloonColor a_color = Red);

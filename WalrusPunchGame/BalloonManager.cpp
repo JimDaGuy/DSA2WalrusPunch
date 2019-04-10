@@ -119,10 +119,10 @@ void BalloonManager::Update()
 			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
 			break;
 		case 3: //Green
-			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Green, balloonPosition);
 			break;
 		case 4: //Gold
-			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Gold, balloonPosition);
 			break;
 		default:
 			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);

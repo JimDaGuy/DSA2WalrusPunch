@@ -22,6 +22,12 @@ Balloon::Balloon(vector3 a_position, BalloonColor a_color)
 	case Blue:
 		m_pEntityMngr->AddEntity("Balloons\\Blue.obj", m_uniqueID);
 		break;
+	case Green:
+		m_pEntityMngr->AddEntity("Balloons\\Green.obj", m_uniqueID);
+		break;
+	case Gold:
+		m_pEntityMngr->AddEntity("Balloons\\Gold.obj", m_uniqueID);
+		break;
 	default:
 		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
 	}
