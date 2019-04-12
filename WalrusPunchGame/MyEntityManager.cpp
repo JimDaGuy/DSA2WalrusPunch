@@ -184,7 +184,7 @@ void Simplex::MyEntityManager::Update(void)
 		}
 	}
 }
-void Simplex::MyEntityManager::AddEntity(String a_sFileName, String a_sUniqueID)
+void Simplex::MyEntityManager::AddEntity(String a_sFileName, String a_sUniqueID, int a_row)
 {
 	//Create a temporal entity to store the object
 	MyEntity* pTemp = new MyEntity(a_sFileName, a_sUniqueID);

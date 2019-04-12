@@ -42,9 +42,10 @@ public:
 	ARGUMENTS:
 	-	String a_sFileName -> Name of the model to load
 	-	String a_sUniqueID -> Name wanted as identifier, if not available will generate one
+	-	String a_row -> Unique row that this entity is in. Will only collide others in this row. -1 will collide with everyone.
 	OUTPUT: ---
 	*/
-	void AddEntity(String a_sFileName, String a_sUniqueID = "NA");
+	void AddEntity(String a_sFileName, String a_sUniqueID = "NA", int a_row = -1);
 	/*
 	USAGE: Deletes the MyEntity Specified by unique ID and removes it from the list
 	ARGUMENTS: uint a_uIndex -> index of the queried entry, if < 0 asks for the last one added

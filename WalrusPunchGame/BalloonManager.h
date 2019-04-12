@@ -25,9 +25,8 @@ public:
 		uint a_msPerBalloonSpawn = 100
 	);
 	void Update();
-	void CheckCollisions();
 	void DisplayLines(vector3 a_color);
-	void CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position);
+	void CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position, uint a_row);
 	void DestroyBalloon(uint a_balloonIndex);
 	uint WeightedRandom();
 	~BalloonManager();

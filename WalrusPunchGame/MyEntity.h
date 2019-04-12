@@ -16,6 +16,7 @@ class MyEntity
 	bool m_bInMemory = false; //loaded flag
 	bool m_bSetAxis = false; //render axis flag
 	String m_sUniqueID = ""; //Unique identifier name
+	int m_row = -1; // row this entity is in. only will colide with others in this row. -1 row will collide with everything
 
 	uint m_nDimensionCount = 0; //tells how many dimensions this entity lives in
 	uint* m_DimensionArray = nullptr; //Dimensions on which this entity is located
@@ -36,7 +37,7 @@ public:
 	-	String a_sUniqueID -> Name wanted as identifier, if not available will generate one
 	Output: class object instance
 	*/
-	MyEntity(String a_sFileName, String a_sUniqueID = "NA");
+	MyEntity(String a_sFileName, String a_sUniqueID = "NA", int a_row = -1);
 	/*
 	Usage: Copy Constructor
 	Arguments: class object to copy

@@ -113,42 +113,24 @@ void BalloonManager::Update()
 
 		switch (ranNum) {
 		case 1: //Blue
-			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
 			break;
 		case 2: //Red
-			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition, lineNum);
 			break;
 		case 3: //Green
-			CreateBalloon(Balloon::BalloonColor::Green, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Green, balloonPosition, lineNum);
 			break;
 		case 4: //Gold
-			CreateBalloon(Balloon::BalloonColor::Gold, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Gold, balloonPosition, lineNum);
 			break;
 		default:
-			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition);
+			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
 			break;
 		}
 
 		// Reset timer
 		lastBalloonSpawn = currentTime;
-	}
-
-	CheckCollisions();
-
-}
-
-void BalloonManager::CheckCollisions()
-{
-	// Will need to keep track of which entities are balloons / darts for collision resolution
-
-	for (uint i = 0; i < m_pEntityMngr->GetEntityCount(); i++)
-	{
-		for (uint j = i + 1; j < m_pEntityMngr->GetEntityCount(); j++)
-		{
-			MyEntity* entity1 = m_pEntityMngr->GetEntity(i);
-			MyEntity* entity2 = m_pEntityMngr->GetEntity(j);
-			entity1->IsColliding(entity2);
-		}
 	}
 }
 
@@ -163,9 +145,9 @@ void BalloonManager::DisplayLines(vector3 a_color)
 	}
 }
 
-void BalloonManager::CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position)
+void BalloonManager::CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position, uint a_row)
 {
-	BalloonPointer bTemp = new Balloon(a_position, a_color);
+	BalloonPointer bTemp = new Balloon(a_position, a_color, a_row);
 	MyEntity* bTempEntity = bTemp->GetEntity();
 
 	if (bTempEntity->IsInitialized()) {

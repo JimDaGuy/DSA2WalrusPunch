@@ -26,36 +26,36 @@ void Application::InitVariables(void)
 #endif
 	int nSquare = static_cast<int>(std::sqrt(uInstances));
 	m_uObjects = nSquare * nSquare;
-	/*
-	uint uIndex = -1;
-	for (int i = 0; i < nSquare; i++)
-	{
-		for (int j = 0; j < nSquare; j++)
-		{
-			uIndex++;
-			m_pEntityMngr->AddEntity("Minecraft\\Cube.obj");
-			vector3 v3Position = vector3(glm::sphericalRand(34.0f));
-			matrix4 m4Position = glm::translate(v3Position);
-			m_pEntityMngr->SetModelMatrix(m4Position);
-		}
-	}
-	*/
+
+	uint balloonRowCount = 10;
+	vector3 balloonRowFrontCenter = vector3(0.0f, -1.0f, -7.5f);
+	vector3 BalloonRowsForwardVector = -AXIS_Z;
+	vector3 BalloonRowsRightVector = AXIS_X;
+	float balloonRowSpacing = 3.0f;
+	float balloonRowLength = 50.0f;
+	float balloonMaxHeight = 20.0f;
 
 	m_BalloonMngr = new BalloonManager(
-		4,
-		vector3(0.0f, -1.0f, -7.5f),
-		-AXIS_Z,
-		AXIS_X,
-		3.0f,
-		15.0f,
-		7.5f,
-		10,
-		500 // Change this to an actual time later
+		balloonRowCount, // number of rows
+		balloonRowFrontCenter, // center of rows
+		BalloonRowsForwardVector, // forward vector
+		BalloonRowsRightVector, // right vector
+		balloonRowSpacing, // spacing between rows
+		balloonRowLength, // length of lines
+		balloonMaxHeight, // maximum height a balloon can reach before despawning
+		5000, // maximum number of balloons
+		5 // ms per balloon spawn
 	);
+
+	// Calculate the center of the octree based on the balloon manager parameters
+	m_OctreeCenter = balloonRowFrontCenter + 
+		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) + 
+		(glm::cross(BalloonRowsForwardVector, BalloonRowsRightVector) * -1.0f * (balloonMaxHeight / 2.0f));
+	// Calculate the necessary size of the octree based on the balloon manager parameters
+	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f);
 
 	m_uOctantLevels = 3;
 	m_uOctantID = 0;
-	m_pRoot = new MyOctree(m_uOctantLevels);
 }
 void Application::Update(void)
 {
@@ -67,6 +67,11 @@ void Application::Update(void)
 
 	//Is the first person camera active?
 	CameraRotation();
+
+	// Recreate the octree as the balloons have moved
+	SafeDelete(m_pRoot);
+	if (m_uOctantLevels > 0)
+		m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
 	
 	//Update Entity Manager
 	// If octree exists, use the octree's collision check

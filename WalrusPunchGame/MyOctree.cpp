@@ -1,12 +1,12 @@
 #include "MyOctree.h"
 
-MyOctree::MyOctree(uint a_octreeLevels)
+MyOctree::MyOctree(uint a_octreeLevels, float a_halfWidth, vector3 a_center)
 {
 	octreeLevels = a_octreeLevels;
-	// Initial octant will be 70x70x70
-	octreeHalfWidth = vector3(35.0f);
-	// Centered at 0,0,0
-	octreeCenter = vector3(0.0f);
+	// Initial octant will be 70x70x70 if arg is 35.0f
+	octreeHalfWidth = vector3(a_halfWidth);
+	// center of octree
+	octreeCenter = a_center;
 	// Arbitrary int for threshold of subdivision
 	subdivisionThreshold = 8;
 

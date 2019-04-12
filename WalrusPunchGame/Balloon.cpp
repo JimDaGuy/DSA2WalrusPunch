@@ -2,7 +2,7 @@
 
 int Balloon::IdIterator = -1;
 
-Balloon::Balloon(vector3 a_position, BalloonColor a_color)
+Balloon::Balloon(vector3 a_position, BalloonColor a_color, uint a_row)
 {
 	++IdIterator;
 
@@ -17,19 +17,19 @@ Balloon::Balloon(vector3 a_position, BalloonColor a_color)
 	switch (a_color)
 	{
 	case Red:
-		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
+		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID, a_row);
 		break;
 	case Blue:
-		m_pEntityMngr->AddEntity("Balloons\\Blue.obj", m_uniqueID);
+		m_pEntityMngr->AddEntity("Balloons\\Blue.obj", m_uniqueID, a_row);
 		break;
 	case Green:
-		m_pEntityMngr->AddEntity("Balloons\\Green.obj", m_uniqueID);
+		m_pEntityMngr->AddEntity("Balloons\\Green.obj", m_uniqueID, a_row);
 		break;
 	case Gold:
-		m_pEntityMngr->AddEntity("Balloons\\Gold.obj", m_uniqueID);
+		m_pEntityMngr->AddEntity("Balloons\\Gold.obj", m_uniqueID, a_row);
 		break;
 	default:
-		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID);
+		m_pEntityMngr->AddEntity("Balloons\\Red.obj", m_uniqueID, a_row);
 	}
 
 	vector3 v3Position = a_position;

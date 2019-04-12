@@ -58,7 +58,7 @@ void Simplex::MyEntity::Release(void)
 	m_IDMap.erase(m_sUniqueID);
 }
 //The big 3
-Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID)
+Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID, int a_row)
 {
 	Init();
 	m_pModel = new Model();
@@ -68,6 +68,7 @@ Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID)
 	{
 		GenUniqueID(a_sUniqueID);
 		m_sUniqueID = a_sUniqueID;
+		m_row = a_row;
 		m_IDMap[a_sUniqueID] = this;
 		m_pRigidBody = new MyRigidBody(m_pModel->GetVertexList()); //generate a rigid body
 		m_bInMemory = true; //mark this entity as viable
@@ -219,6 +220,10 @@ bool Simplex::MyEntity::SharesDimension(MyEntity* const a_pOther)
 		if(0 == a_pOther->m_nDimensionCount)
 			return true;
 	}
+
+	// If the entities are in different rows, break early
+	if (m_row != a_pOther->m_row && m_row != -1 && a_pOther->m_row != -1)
+		return false;
 
 	//for each dimension on both Entities we check if there is a common dimension
 	for (uint i = 0; i < m_nDimensionCount; ++i)

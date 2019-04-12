@@ -16,7 +16,7 @@ public:
 		Gold
 	};
 	Balloon(BalloonColor a_color = Red);
-	Balloon(vector3 a_position, BalloonColor a_color = Red);
+	Balloon(vector3 a_position, BalloonColor a_color, uint a_row);
 	void Swap(Balloon& other);
 	~Balloon();
 	void MoveTo(vector3 position);

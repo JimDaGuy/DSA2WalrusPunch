@@ -8,7 +8,7 @@ using namespace Simplex;
 class MyOctree
 {
 public:
-	MyOctree(uint a_octreeLevels = 1);
+	MyOctree(uint a_octreeLevels, float a_halfWidth, vector3 a_center);
 	~MyOctree();
 	void Display(vector3 a_v3Color);
 	void CheckCollisions();

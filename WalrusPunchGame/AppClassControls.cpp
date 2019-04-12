@@ -111,12 +111,6 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		break;
 	case sf::Keyboard::PageUp:
 		m_uOctantID = 1;
-		/*
-		++m_uOctantID;
-		/*
-		if (m_uOctantID >= m_pRoot->GetOctantCount())
-			m_uOctantID = - 1;
-			*/
 		break;
 	case sf::Keyboard::T:
 		delete m_BalloonMngr;
@@ -124,22 +118,12 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		break;
 	case sf::Keyboard::PageDown:
 		m_uOctantID = 0;
-		/*
-		--m_uOctantID;
-		if (m_uOctantID >= m_pRoot->GetOctantCount())
-			m_uOctantID = - 1;
-			// I added this part
-		if (m_uOctantID < -1)
-			m_uOctantID = -1;
-		*/
 		break;
 	case sf::Keyboard::Y:
 		if (m_uOctantLevels < 5)
 		{
 			m_pEntityMngr->ClearDimensionSetAll();
 			++m_uOctantLevels;
-			SafeDelete(m_pRoot);
-			m_pRoot = new MyOctree(m_uOctantLevels);
 		}
 		break;
 	case sf::Keyboard::U:
@@ -147,12 +131,9 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		{
 			m_pEntityMngr->ClearDimensionSetAll();
 			--m_uOctantLevels;
-			SafeDelete(m_pRoot);
-			m_pRoot = new MyOctree(m_uOctantLevels);
 		}
 		else {
 			m_uOctantLevels = 0;
-			SafeDelete(m_pRoot);
 		}
 		break;
 	case sf::Keyboard::LShift:
