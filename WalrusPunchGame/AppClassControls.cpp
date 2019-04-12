@@ -136,6 +136,22 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			m_uOctantLevels = 0;
 		}
 		break;
+	case sf::Keyboard::N:
+		InitBalloonManager();
+		break;
+	case sf::Keyboard::M:
+		InitBalloonManager(
+			10, // number of rows
+			vector3(0.0f, -1.0f, -7.5f), // center of rows
+			-AXIS_Z, // forward vector
+			AXIS_X, // right vector
+			3.0f, // spacing between rows
+			50.0f, // length of lines
+			20.0f, // maximum height a balloon can reach before despawning
+			5000, // maximum number of balloons
+			5 // ms per balloon spawn
+		);
+		break;
 	case sf::Keyboard::LShift:
 	case sf::Keyboard::RShift:
 		m_bModifier = false;

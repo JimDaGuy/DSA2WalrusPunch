@@ -27,13 +27,25 @@ void Application::InitVariables(void)
 	int nSquare = static_cast<int>(std::sqrt(uInstances));
 	m_uObjects = nSquare * nSquare;
 
-	uint balloonRowCount = 10;
-	vector3 balloonRowFrontCenter = vector3(0.0f, -1.0f, -7.5f);
-	vector3 BalloonRowsForwardVector = -AXIS_Z;
-	vector3 BalloonRowsRightVector = AXIS_X;
-	float balloonRowSpacing = 3.0f;
-	float balloonRowLength = 50.0f;
-	float balloonMaxHeight = 20.0f;
+	InitBalloonManager();
+
+	m_uOctantID = 0;
+	m_uOctantLevels = 3;
+}
+void Application::InitBalloonManager
+(
+	uint balloonRowCount,
+	vector3 balloonRowFrontCenter,
+	vector3 BalloonRowsForwardVector,
+	vector3 BalloonRowsRightVector,
+	float balloonRowSpacing,
+	float balloonRowLength,
+	float balloonMaxHeight,
+	uint balloonMaxCount,
+	uint msPerBalloonSpawn
+)
+{
+	SafeDelete(m_BalloonMngr);
 
 	m_BalloonMngr = new BalloonManager(
 		balloonRowCount, // number of rows
@@ -43,19 +55,16 @@ void Application::InitVariables(void)
 		balloonRowSpacing, // spacing between rows
 		balloonRowLength, // length of lines
 		balloonMaxHeight, // maximum height a balloon can reach before despawning
-		5000, // maximum number of balloons
-		5 // ms per balloon spawn
+		balloonMaxCount, // maximum number of balloons
+		msPerBalloonSpawn // ms per balloon spawn
 	);
 
 	// Calculate the center of the octree based on the balloon manager parameters
-	m_OctreeCenter = balloonRowFrontCenter + 
-		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) + 
+	m_OctreeCenter = balloonRowFrontCenter +
+		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) +
 		(glm::cross(BalloonRowsForwardVector, BalloonRowsRightVector) * -1.0f * (balloonMaxHeight / 2.0f));
 	// Calculate the necessary size of the octree based on the balloon manager parameters
 	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f);
-
-	m_uOctantLevels = 3;
-	m_uOctantID = 0;
 }
 void Application::Update(void)
 {

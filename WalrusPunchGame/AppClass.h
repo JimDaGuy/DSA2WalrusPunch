@@ -125,6 +125,21 @@ private:
 	*/
 	void InitVariables(void);
 	/*
+	USAGE: Initializes the balloon manager and octree parameters
+	*/
+	void InitBalloonManager
+	(
+		uint balloonRowCount = 4,
+		vector3 balloonRowFrontCenter = vector3(0.0f),
+		vector3 BalloonRowsForwardVector = -AXIS_Z,
+		vector3 BalloonRowsRightVector = AXIS_X,
+		float balloonRowSpacing = 3.0f,
+		float balloonRowLength = 15.0f,
+		float balloonMaxHeight = 7.5f,
+		uint balloonMaxCount = 10,
+		uint msPerBalloonSpawn = 500
+	);
+	/*
 	USAGE: Reads the configuration of the application to a file
 	ARGUMENTS: ---
 	OUTPUT: ---

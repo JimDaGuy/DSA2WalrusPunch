@@ -14,15 +14,15 @@ uint balloonCount = 0;
 public:
 	BalloonManager
 	(
-		uint a_lines = 3,
+		uint a_lines = 4,
 		vector3 a_lineCenter = vector3(0.0f),
 		vector3 a_forwardVec = -AXIS_Z,
 		vector3 a_rightwardVec = AXIS_X,
-		float a_spaceBetweenLines = 5.0f,
-		float a_lineLength = 10.0f,
-		float a_maxHeight = 10.0f,
-		uint a_balloonMax = 100,
-		uint a_msPerBalloonSpawn = 100
+		float a_spaceBetweenLines = 3.0f,
+		float a_lineLength = 15.0f,
+		float a_maxHeight = 7.5f,
+		uint a_balloonMax = 10,
+		uint a_msPerBalloonSpawn = 500
 	);
 	void Update();
 	void DisplayLines(vector3 a_color);
