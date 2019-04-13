@@ -59,6 +59,8 @@ void Application::InitBalloonManager
 		msPerBalloonSpawn // ms per balloon spawn
 	);
 
+	// Reset octant levels, otherwise program will break
+	m_uOctantLevels = 3;
 	// Calculate the center of the octree based on the balloon manager parameters
 	m_OctreeCenter = balloonRowFrontCenter +
 		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) +
