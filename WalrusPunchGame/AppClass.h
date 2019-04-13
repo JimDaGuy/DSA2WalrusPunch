@@ -28,7 +28,7 @@ class Application
 	MyOctree* m_pRoot = nullptr;
 	BalloonManager* m_BalloonMngr = nullptr;
 private:
-	String m_sProgrammer = "James DiGrazia jtd2401@rit.edu"; //programmer
+	String m_sProgrammer = "Walrus Punch"; //programmer
 
 	static ImGuiObject gui; //GUI object
 	bool m_bGUI_Main = true; //show Main GUI window?

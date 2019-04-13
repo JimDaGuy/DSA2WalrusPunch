@@ -6,7 +6,7 @@ void Application::InitVariables(void)
 	// Seed random numbers for the program
 	srand(static_cast <unsigned> (time(0)));
 
-	m_sProgrammer = "James DiGrazia jtd2401@rit.edu";
+	m_sProgrammer = "Walrus Punch";
 
 	//Hide the cursor
 	m_pWindow->setMouseCursorVisible(false);

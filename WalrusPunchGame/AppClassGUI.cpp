@@ -55,6 +55,9 @@ void Application::DrawGUI(void)
 			ImGui::Text("	  Y: Increment Octree subdivision\n");
 			ImGui::Text("	  U: Decrement Octree subdivision\n");
 			ImGui::Separator();
+			ImGui::Text("	  N: Normal Mode\n");
+			ImGui::Text("	  M: Mad Mode (octree stress test)\n");
+			ImGui::Separator();
 			ImGui::TextColored(ImColor(255, 255, 0), "Octree\n");
 		}
 		ImGui::End();
