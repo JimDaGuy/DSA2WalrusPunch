@@ -38,6 +38,7 @@ private:
 	float leftRightDistance;
 	bool movingLeft;
 	float horizontalSpeed;
+	vector3 bounceVector;
 };
 
 #endif //__BALLOON_H_
