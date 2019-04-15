@@ -28,6 +28,7 @@ void Application::InitVariables(void)
 	m_uObjects = nSquare * nSquare;
 
 	InitBalloonManager();
+	m_Dart = new Dart(vector3(0));
 
 	m_uOctantID = 0;
 	m_uOctantLevels = 3;
@@ -78,6 +79,22 @@ void Application::Update(void)
 
 	//Is the first person camera active?
 	CameraRotation();
+
+	// Have dart follow camera if it has not been thrown and handle flight if it has been
+	if (!m_Dart->m_bThrown)
+	{
+		m_Dart->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f);
+	}
+	else
+	{
+		m_Dart->HandleFlight();
+	}
+
+	// Respawn dart if below y = 0
+	if (m_Dart->GetPosition().y < 0)
+	{
+		m_Dart->Respawn();
+	}
 
 	// Recreate the octree as the balloons have moved
 	SafeDelete(m_pRoot);

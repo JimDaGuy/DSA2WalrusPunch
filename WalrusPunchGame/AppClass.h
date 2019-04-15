@@ -13,6 +13,7 @@ Date: 2017/06
 #include "MyEntityManager.h"
 #include "MyOctree.h"
 #include "BalloonManager.h"
+#include "Dart.h"
 
 namespace Simplex
 {
@@ -27,6 +28,7 @@ class Application
 	float m_OctreeHalfWidth; //Half width of the octree
 	MyOctree* m_pRoot = nullptr;
 	BalloonManager* m_BalloonMngr = nullptr;
+	Dart* m_Dart = nullptr;
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer
 
