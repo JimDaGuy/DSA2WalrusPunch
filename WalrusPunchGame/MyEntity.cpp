@@ -70,7 +70,7 @@ Simplex::MyEntity::MyEntity(String a_sFileName, String a_sUniqueID, int a_row)
 		m_sUniqueID = a_sUniqueID;
 		m_row = a_row;
 		m_IDMap[a_sUniqueID] = this;
-		m_pRigidBody = new MyRigidBody(m_pModel->GetVertexList()); //generate a rigid body
+		m_pRigidBody = new MyRigidBody(m_pModel->GetVertexList(), a_sUniqueID); //generate a rigid body
 		m_bInMemory = true; //mark this entity as viable
 	}
 }

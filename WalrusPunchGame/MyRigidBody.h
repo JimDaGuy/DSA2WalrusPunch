@@ -39,18 +39,19 @@ class MyRigidBody
 	vector3 m_v3ARBBSize = ZERO_V3;// size of the Axis (Re)Alligned Bounding Box
 
 	matrix4 m_m4ToWorld = IDENTITY_M4; //Matrix that will take us from local to world coordinate
-	
 
 public:
 	PRigidBody* m_CollidingArray = nullptr; //array of rigid bodies this one is colliding with
 	uint m_nCollidingCount = 0; //size of the colliding set
+
+	String m_uniqueID; // unique identifier for this rigid body
 
 	/*
 	Usage: Constructor
 	Arguments: std::vector<vector3> a_pointList -> list of points to make the Rigid Body for
 	Output: class object instance
 	*/
-	MyRigidBody(std::vector<vector3> a_pointList);
+	MyRigidBody(std::vector<vector3> a_pointList, String a_uniqueID = "");
 	/*
 	Usage: Copy Constructor
 	Arguments: class object to copy

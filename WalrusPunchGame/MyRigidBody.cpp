@@ -133,9 +133,12 @@ void MyRigidBody::SetModelMatrix(matrix4 a_m4ModelMatrix)
 	m_v3ARBBSize = m_v3MaxG - m_v3MinG;
 }
 //The big 3
-MyRigidBody::MyRigidBody(std::vector<vector3> a_pointList)
+MyRigidBody::MyRigidBody(std::vector<vector3> a_pointList, String a_uniqueID)
 {
 	Init();
+	// Set this unique identifier
+	m_uniqueID = a_uniqueID;
+
 	//Count the points of the incoming list
 	uint uVertexCount = a_pointList.size();
 
