@@ -75,6 +75,14 @@ void BalloonManager::Update()
 			}
 		}
 
+		//Move balloon away from any colliding balloons
+		PRigidBody* collidingList = current->GetEntity()->GetRigidBody()->m_CollidingArray;
+		uint collidingListSize = current->GetEntity()->GetRigidBody()->m_nCollidingCount;
+		for (uint i = 0; i < collidingListSize; i++)
+		{
+			std::printf("colliding");
+		}
+
 		// If any of the balloons are higher than the maxHeight,
 		if (current->GetPosition().y > lineCenter.y + maxHeight) {
 			// Delete the balloon and decrement the loop

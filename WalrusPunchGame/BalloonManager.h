@@ -54,6 +54,7 @@ private:
 	// Weights for random gen, highest to lowest
 	std::vector<uint> weights = { 7, 4, 3, 1 };
 
+	typedef MyRigidBody* PRigidBody; //Entity Pointer
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 };
