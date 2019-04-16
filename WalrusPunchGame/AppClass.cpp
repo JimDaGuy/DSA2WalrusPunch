@@ -101,13 +101,12 @@ void Application::Update(void)
 	if (m_uOctantLevels > 0)
 		m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
 	
+	
+
 	//Update Entity Manager
 	// If octree exists, use the octree's collision check
 	// Otherwise use the entity manager's collision check
 	m_pEntityMngr->ClearCollisions();
-
-	if (m_BalloonMngr != nullptr)
-		m_BalloonMngr->Update();
 
 	if (m_pRoot == nullptr) {
 		m_pEntityMngr->Update();
@@ -116,6 +115,9 @@ void Application::Update(void)
 		// Check collisions
 		m_pRoot->CheckCollisions();
 	}
+
+	if (m_BalloonMngr != nullptr)
+		m_BalloonMngr->Update();
 
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);

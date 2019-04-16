@@ -236,7 +236,7 @@ void MyRigidBody::AddCollisionWith(MyRigidBody* other)
 	pTemp[m_nCollidingCount] = other;
 	m_CollidingArray = pTemp;
 
-	++m_nCollidingCount;
+	m_nCollidingCount++;
 }
 void MyRigidBody::RemoveCollisionWith(MyRigidBody* other)
 {
