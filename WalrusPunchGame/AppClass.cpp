@@ -1,6 +1,7 @@
 #include "AppClass.h"
 using namespace Simplex;
 using namespace std;
+
 void Application::InitVariables(void)
 {
 	// Seed random numbers for the program

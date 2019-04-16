@@ -29,6 +29,7 @@ class Application
 	MyOctree* m_pRoot = nullptr;
 	BalloonManager* m_BalloonMngr = nullptr;
 	Dart* m_Dart = nullptr;
+	
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer
 

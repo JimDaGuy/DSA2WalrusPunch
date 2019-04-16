@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 
-
 BalloonManager::BalloonManager
 (
 	uint a_lines,
@@ -78,10 +77,51 @@ void BalloonManager::Update()
 		//Move balloon away from any colliding balloons
 		PRigidBody* collidingList = current->GetEntity()->GetRigidBody()->m_CollidingArray;
 		uint collidingListSize = current->GetEntity()->GetRigidBody()->m_nCollidingCount;
-		for (int i = 0; i < collidingListSize; i++)
+		vector3 dir = ZERO_V3;
+		
+		//Check if any collisions in the list
+		if (collidingListSize > 0)
 		{
-			current->setMovingLeft(!current->getMovingLeft());
+			//Loop through all the colliding balloons
+			for (int x = 0; x < collidingListSize; x++)
+			{
+				//If the ID contains "Dart" destroy this balloon and increment score.
+				if (collidingList[x]->m_uniqueID.find("Dart") != String::npos)
+				{
+					switch (current->color)
+					{
+					case Balloon::BalloonColor::Red:
+						score -= 1;
+						break;
+					case Balloon::BalloonColor::Blue:
+						score += 1;
+						break;
+					case Balloon::BalloonColor::Green:
+						score += 3;
+						break;
+					case Balloon::BalloonColor::Gold:
+						score += 10;
+						break;
+					default:
+						score += 1;
+						break;
+					}
+
+					//Destroy the balloon by moving it above the max height
+					currentPos.y += (maxHeight * 3);
+					break;
+				}
+				else
+				{
+					dir += collidingList[x]->GetCenterGlobal();
+				}
+			}
+			dir = dir / collidingListSize; //Average all the positions of the colliding objects
+			dir = dir - currentPos; //Subract the direction by the current position of this object
+			dir = glm::normalize(dir) * -1; //normalize the dir and invert it
+			currentPos += (dir * .3); //Multiply direction by force and add it to the current position
 		}
+		
 
 		// If any of the balloons are higher than the maxHeight,
 		if (current->GetPosition().y > lineCenter.y + maxHeight) {

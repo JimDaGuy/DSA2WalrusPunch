@@ -28,12 +28,12 @@ public:
 	bool getMovingLeft();
 	void setMovingLeft(bool left);
 	float getHorizontalSpeed();
+	BalloonColor color;
 private:
 	static int IdIterator;
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 	std::string m_uniqueID;
-	BalloonColor color;
 	float horizontalOffset;
 	float leftRightDistance;
 	bool movingLeft;

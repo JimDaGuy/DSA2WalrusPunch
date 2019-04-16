@@ -30,6 +30,7 @@ public:
 	void DestroyBalloon(uint a_balloonIndex);
 	uint WeightedRandom();
 	~BalloonManager();
+	uint score = 0;
 private:
 	// Number of lines to be generated
 	uint lines;
