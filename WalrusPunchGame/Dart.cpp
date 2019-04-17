@@ -47,7 +47,7 @@ void Dart::Throw(vector3 a_v3Forward)
 	}
 }
 
-void Dart::HandleFlight()
+void Dart::HandleFlight(uint a_deltaMS)
 {
 	if (m_fThrowForce > 0)
 	{

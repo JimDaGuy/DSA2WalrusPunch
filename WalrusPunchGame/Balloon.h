@@ -22,10 +22,12 @@ public:
 	void MoveTo(vector3 position);
 	MyEntity* GetEntity();
 	vector3 GetPosition();
-	float getHorizontalOffset();
-	void setHorizontalOffset(float offset);
-	float getLeftRightDistance();
+	float getLeftRightSpeed();
 	bool getMovingLeft();
+	vector3 getVelocity();
+	void setVelocity(vector3 a_velocity);
+	vector3 getBounce();
+	void setBounce(vector3 a_bounceVelocity);
 	void setMovingLeft(bool left);
 	float getHorizontalSpeed();
 	BalloonColor color;
@@ -34,11 +36,11 @@ private:
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
 	std::string m_uniqueID;
-	float horizontalOffset;
-	float leftRightDistance;
+	float leftRightMaxSpeed;
 	bool movingLeft;
 	float horizontalSpeed;
-	vector3 bounceVector;
+	vector3 m_bounceVelocity;
+	vector3 m_velocity;
 };
 
 #endif //__BALLOON_H_

@@ -46,30 +46,27 @@ BalloonManager::~BalloonManager()
 	m_pEntityMngr = nullptr;
 }
 
-void BalloonManager::Update()
+void BalloonManager::Update(uint a_deltaMS)
 {
+	float speedMultiplier = a_deltaMS / 10.0f;
+
 	// Iterate through list of balloons
 	for (uint i = 0; i < balloonCount; i++) {
 		BalloonPointer current = balloonList[i];
 		vector3 currentPos = current->GetPosition();
 
-		// Move the balloon upward
-		currentPos.y += .02;
-
 		// Move the balloon left and right
 		if (current->getMovingLeft())
 		{
-			currentPos.x -= current->getHorizontalSpeed();
-			current->setHorizontalOffset(current->getHorizontalSpeed() * -1);
-			if (current->getHorizontalOffset() < current->getLeftRightDistance() * -1) {
+			current->setVelocity(current->getVelocity() + (rightwardVec * current->getHorizontalSpeed() * speedMultiplier * -.0002f));
+			if (current->getVelocity().x < current->getLeftRightSpeed() * -1) {
 				current->setMovingLeft(false);
 			}
 		}
 		else
 		{
-			currentPos.x += current->getHorizontalSpeed();
-			current->setHorizontalOffset(current->getHorizontalSpeed());
-			if (current->getHorizontalOffset() > current->getLeftRightDistance()) {
+			current->setVelocity(current->getVelocity() + (rightwardVec * current->getHorizontalSpeed() * speedMultiplier * 0.0002f));
+			if (current->getVelocity().x > current->getLeftRightSpeed()) {
 				current->setMovingLeft(true);
 			}
 		}
@@ -119,7 +116,15 @@ void BalloonManager::Update()
 			dir = dir / collidingListSize; //Average all the positions of the colliding objects
 			dir = dir - currentPos; //Subract the direction by the current position of this object
 			dir = glm::normalize(dir) * -1; //normalize the dir and invert it
-			currentPos += (dir * .3); //Multiply direction by force and add it to the current position
+			current->setBounce(current->getBounce() + (dir * .001f * speedMultiplier)); // Increase velocity away from other balloons
+		}
+		else if (glm::length(current->getBounce()) > 0.0001f) {
+			// Reduce the bounce velocity back to 0 when no longer colliding
+			vector3 diminishBounce = glm::normalize(current->getBounce()) * .001f * speedMultiplier;
+			current->setBounce(current->getBounce() - diminishBounce);
+			if (current->getBounce().length < diminishBounce.length) {
+				current->setBounce(ZERO_V3);
+			}
 		}
 		
 
@@ -131,7 +136,7 @@ void BalloonManager::Update()
 			continue;
 		}
 
-		current->MoveTo(currentPos);
+		current->MoveTo(currentPos + (current->getVelocity() * speedMultiplier) + (current->getBounce() * speedMultiplier));
 	}
 
 	// Increment the msSinceLastBalloonSpawn

@@ -36,14 +36,14 @@ Balloon::Balloon(vector3 a_position, BalloonColor a_color, uint a_row)
 	matrix4 m4Position = glm::translate(v3Position);
 	m_pEntityMngr->SetModelMatrix(m4Position);
 
-	// Keeps track of how far left and right of original position the balloon is
-	horizontalOffset = 0;
-	// Change for how far left and right balloons float
-	leftRightDistance = 1.0f;
+	// Change how far left and right balloons float
+	leftRightMaxSpeed = 0.02f;
 	// Set to random (t/f) for more movement variety
 	movingLeft = false;
 	// Speed balloons move back and forth
-	horizontalSpeed = .01f;
+	horizontalSpeed = 1.0f;
+	m_velocity = vector3(0.0f, 0.02f, 0.0f);
+	m_bounceVelocity = ZERO_V3;
 }
 
 void Balloon::Swap(Balloon & other)
@@ -76,19 +76,9 @@ vector3 Balloon::GetPosition()
 	return GetEntity()->GetRigidBody()->GetCenterGlobal();
 }
 
-float Balloon::getHorizontalOffset()
+float Balloon::getLeftRightSpeed()
 {
-	return horizontalOffset;
-}
-
-void Balloon::setHorizontalOffset(float offset)
-{
-	horizontalOffset += offset;
-}
-
-float Balloon::getLeftRightDistance()
-{
-	return leftRightDistance;
+	return leftRightMaxSpeed;
 }
 
 bool Balloon::getMovingLeft()
@@ -104,4 +94,24 @@ void Balloon::setMovingLeft(bool left)
 float Balloon::getHorizontalSpeed()
 {
 	return horizontalSpeed;
+}
+
+vector3 Balloon::getVelocity()
+{
+	return m_velocity;
+}
+
+void Balloon::setVelocity(vector3 a_velocity)
+{
+	m_velocity = a_velocity;
+}
+
+vector3 Balloon::getBounce()
+{
+	return m_bounceVelocity;
+}
+
+void Balloon::setBounce(vector3 a_bounceVelocity)
+{
+	m_bounceVelocity = a_bounceVelocity;
 }

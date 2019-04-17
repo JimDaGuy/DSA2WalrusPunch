@@ -32,7 +32,10 @@ void Application::InitVariables(void)
 	m_Dart = new Dart(vector3(0));
 
 	m_uOctantID = 0;
-	m_uOctantLevels = 3;
+	m_uOctantLevels = 3; 
+
+	m_lastTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count()); 
+	m_lastCollisionCheckTime = 0;
 }
 void Application::InitBalloonManager
 (
@@ -72,6 +75,11 @@ void Application::InitBalloonManager
 }
 void Application::Update(void)
 {
+	// Calculate how long since the last frame
+	uint currentTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
+	uint deltaMS = currentTime - m_lastTime;
+	m_lastTime = currentTime;
+
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
 
@@ -88,7 +96,7 @@ void Application::Update(void)
 	}
 	else
 	{
-		m_Dart->HandleFlight();
+		m_Dart->HandleFlight(deltaMS);
 	}
 
 	// Respawn dart if below y = 0
@@ -101,24 +109,26 @@ void Application::Update(void)
 	SafeDelete(m_pRoot);
 	if (m_uOctantLevels > 0)
 		m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
-	
-	
 
-	//Update Entity Manager
-	// If octree exists, use the octree's collision check
-	// Otherwise use the entity manager's collision check
-	m_pEntityMngr->ClearCollisions();
+	// Check collisions every 50 ms
+	if (currentTime - m_lastCollisionCheckTime > 50) {
+		m_lastCollisionCheckTime = currentTime;
+		//Update Entity Manager
+		// If octree exists, use the octree's collision check
+		// Otherwise use the entity manager's collision check
+		m_pEntityMngr->ClearCollisions();
 
-	if (m_pRoot == nullptr) {
-		m_pEntityMngr->Update();
-	}
-	else {
-		// Check collisions
-		m_pRoot->CheckCollisions();
+		if (m_pRoot == nullptr) {
+			m_pEntityMngr->Update();
+		}
+		else {
+			// Check collisions
+			m_pRoot->CheckCollisions();
+		}
 	}
 
 	if (m_BalloonMngr != nullptr)
-		m_BalloonMngr->Update();
+		m_BalloonMngr->Update(deltaMS);
 
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);

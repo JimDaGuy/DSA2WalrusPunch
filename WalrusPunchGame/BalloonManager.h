@@ -24,7 +24,7 @@ public:
 		uint a_balloonMax = 10,
 		uint a_msPerBalloonSpawn = 500
 	);
-	void Update();
+	void Update(uint a_deltaMS);
 	void DisplayLines(vector3 a_color);
 	void CreateBalloon(Balloon::BalloonColor a_color, vector3 a_position, uint a_row);
 	void DestroyBalloon(uint a_balloonIndex);

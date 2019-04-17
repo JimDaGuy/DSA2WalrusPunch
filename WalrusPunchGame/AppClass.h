@@ -64,6 +64,9 @@ private:
 	ControllerInput* m_pController[8]; //Controller
 	uint m_uActCont = 0; //Active Controller of the Application
 
+	uint m_lastTime = 0; // Last update time in MS
+	uint m_lastCollisionCheckTime = 0; // Last time collisions were checked in MS
+
 	sf::SoundBuffer m_soundBuffer; //buffer to play sound from
 	sf::Sound m_sound; //sound effect
 	sf::Music m_soundBGM; //background music

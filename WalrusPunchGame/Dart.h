@@ -15,7 +15,7 @@ public:
 	bool m_bThrown;
 	void Throw(vector3 a_v3Forward);
 	float m_fSpeed;
-	void HandleFlight();
+	void HandleFlight(uint a_deltaMS);
 	void Respawn();
 	vector3 GetPosition();
 	float m_fThrowForce;
