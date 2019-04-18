@@ -173,6 +173,8 @@ public:
 	*/
 	void SortDimensions(void);
 
+	int getRow(void);
+
 private:
 	/*
 	Usage: Deallocates member fields

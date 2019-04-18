@@ -105,6 +105,11 @@ void MyOctant::CheckCollision()
 			for (uint k = j + 1; k < entityIndexListSize; k++) {
 				MyEntity* entity1 = mEntityMngr->GetEntity(entityIndexList[j]);
 				MyEntity* entity2 = mEntityMngr->GetEntity(entityIndexList[k]);
+
+				// If the entities are in different rows, break early
+				if (entity1->getRow() != entity2->getRow() && entity1->getRow() != -1 && entity2->getRow() != -1) {
+					continue;
+				}
 				entity1->IsColliding(entity2);
 			}
 		}

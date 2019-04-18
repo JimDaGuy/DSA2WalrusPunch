@@ -221,10 +221,6 @@ bool Simplex::MyEntity::SharesDimension(MyEntity* const a_pOther)
 			return true;
 	}
 
-	// If the entities are in different rows, break early
-	if (m_row != a_pOther->m_row && m_row != -1 && a_pOther->m_row != -1)
-		return false;
-
 	//for each dimension on both Entities we check if there is a common dimension
 	for (uint i = 0; i < m_nDimensionCount; ++i)
 	{
@@ -258,4 +254,9 @@ void Simplex::MyEntity::ClearCollisionList(void)
 void Simplex::MyEntity::SortDimensions(void)
 {
 	std::sort(m_DimensionArray, m_DimensionArray + m_nDimensionCount);
+}
+
+int Simplex::MyEntity::getRow(void)
+{
+	return this->m_row;
 }

@@ -112,7 +112,7 @@ void Application::Update(void)
 	}
 
 	// recreate the octree every 20 ms
-	if (currentTime - m_lastOctreeUpdateTime > 20) {
+	if (currentTime - m_lastOctreeUpdateTime > 10) {
 		m_lastOctreeUpdateTime = currentTime;
 
 		// Recreate the octree as the balloons have moved

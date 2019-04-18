@@ -5,7 +5,7 @@ Dart::Dart(vector3 a_position)
 	m_pMeshMngr = MeshManager::GetInstance();
 	m_pEntityMngr = MyEntityManager::GetInstance();
 
-	m_pEntityMngr->AddEntity("Dart\\Dart.obj", "Dart", 0);
+	m_pEntityMngr->AddEntity("Dart\\Dart.obj", "Dart", -1);
 	m_bThrown = false;
 
 	m_v3Position = a_position;
