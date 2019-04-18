@@ -111,8 +111,8 @@ void Application::Update(void)
 		m_Dart->Respawn();
 	}
 
-	// recreate the octree every 50 ms
-	if (currentTime - m_lastOctreeUpdateTime > 50) {
+	// recreate the octree every 20 ms
+	if (currentTime - m_lastOctreeUpdateTime > 20) {
 		m_lastOctreeUpdateTime = currentTime;
 
 		// Recreate the octree as the balloons have moved
@@ -120,22 +120,20 @@ void Application::Update(void)
 		if (m_uOctantLevels > 0)
 			m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
 
+		//Update Entity Manager
+		// If octree exists, use the octree's collision check
+		// Otherwise use the entity manager's collision check
+		m_pEntityMngr->ClearCollisions();
+
+		if (m_pRoot == nullptr) {
+			m_pEntityMngr->Update();
+		}
+		else {
+			// Check collisions
+			m_pRoot->CheckCollisions();
+		}
 	}
 
-
-
-	//Update Entity Manager
-	// If octree exists, use the octree's collision check
-	// Otherwise use the entity manager's collision check
-	m_pEntityMngr->ClearCollisions();
-
-	if (m_pRoot == nullptr) {
-		m_pEntityMngr->Update();
-	}
-	else {
-		// Check collisions
-		m_pRoot->CheckCollisions();
-	}
 	if (m_BalloonMngr != nullptr)
 		m_BalloonMngr->Update(deltaMS);
 
