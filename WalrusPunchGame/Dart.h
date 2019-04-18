@@ -13,7 +13,7 @@ public:
 	void MoveTo(vector3 a_position);
 	MyEntity* GetEntity();
 	bool m_bThrown;
-	void Throw(vector3 a_v3Forward);
+	void Throw(vector3 a_v3Forward, float a_fThrowForce);
 	float m_fSpeed;
 	void HandleFlight(uint a_deltaMS);
 	void Respawn();

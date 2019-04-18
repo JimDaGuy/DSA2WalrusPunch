@@ -35,7 +35,7 @@ void Application::InitVariables(void)
 	m_uOctantLevels = 3; 
 
 	m_lastTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count()); 
-	m_lastCollisionCheckTime = 0;
+	m_lastOctreeUpdateTime = 0;
 }
 void Application::InitBalloonManager
 (
@@ -50,6 +50,7 @@ void Application::InitBalloonManager
 	uint msPerBalloonSpawn
 )
 {
+	SafeDelete(m_pRoot);
 	SafeDelete(m_BalloonMngr);
 
 	m_BalloonMngr = new BalloonManager(
@@ -92,6 +93,11 @@ void Application::Update(void)
 	// Have dart follow camera if it has not been thrown and handle flight if it has been
 	if (!m_Dart->m_bThrown)
 	{
+		// If the mouse is held down, increase the dart force
+		if (gui.m_bMousePressed[0] == true) {
+			m_DartForce += deltaMS * .0004f;
+			m_DartForce = min(m_DartForce, 0.3f);
+		}
 		m_Dart->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f + glm::cross(m_pCameraMngr->GetForward(), m_pCameraMngr->GetRightward())  * 0.75f);
 	}
 	else
@@ -105,28 +111,31 @@ void Application::Update(void)
 		m_Dart->Respawn();
 	}
 
-	// Recreate the octree as the balloons have moved
-	SafeDelete(m_pRoot);
-	if (m_uOctantLevels > 0)
-		m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
+	// recreate the octree every 50 ms
+	if (currentTime - m_lastOctreeUpdateTime > 50) {
+		m_lastOctreeUpdateTime = currentTime;
 
-	// Check collisions every 50 ms
-	if (currentTime - m_lastCollisionCheckTime > 50) {
-		m_lastCollisionCheckTime = currentTime;
-		//Update Entity Manager
-		// If octree exists, use the octree's collision check
-		// Otherwise use the entity manager's collision check
-		m_pEntityMngr->ClearCollisions();
+		// Recreate the octree as the balloons have moved
+		SafeDelete(m_pRoot);
+		if (m_uOctantLevels > 0)
+			m_pRoot = new MyOctree(m_uOctantLevels, m_OctreeHalfWidth, m_OctreeCenter);
 
-		if (m_pRoot == nullptr) {
-			m_pEntityMngr->Update();
-		}
-		else {
-			// Check collisions
-			m_pRoot->CheckCollisions();
-		}
 	}
 
+
+
+	//Update Entity Manager
+	// If octree exists, use the octree's collision check
+	// Otherwise use the entity manager's collision check
+	m_pEntityMngr->ClearCollisions();
+
+	if (m_pRoot == nullptr) {
+		m_pEntityMngr->Update();
+	}
+	else {
+		// Check collisions
+		m_pRoot->CheckCollisions();
+	}
 	if (m_BalloonMngr != nullptr)
 		m_BalloonMngr->Update(deltaMS);
 

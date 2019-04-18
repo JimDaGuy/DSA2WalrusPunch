@@ -29,6 +29,7 @@ class Application
 	MyOctree* m_pRoot = nullptr;
 	BalloonManager* m_BalloonMngr = nullptr;
 	Dart* m_Dart = nullptr;
+	float m_DartForce = 0;
 	
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer
@@ -65,7 +66,7 @@ private:
 	uint m_uActCont = 0; //Active Controller of the Application
 
 	uint m_lastTime = 0; // Last update time in MS
-	uint m_lastCollisionCheckTime = 0; // Last time collisions were checked in MS
+	uint m_lastOctreeUpdateTime = 0; // Last time the octree was recreated in MS
 
 	sf::SoundBuffer m_soundBuffer; //buffer to play sound from
 	sf::Sound m_sound; //sound effect

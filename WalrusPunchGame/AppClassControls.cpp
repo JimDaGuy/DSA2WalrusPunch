@@ -39,7 +39,8 @@ void Application::ProcessMouseReleased(sf::Event a_event)
 	default: break;
 	case sf::Mouse::Button::Left:
 		gui.m_bMousePressed[0] = false;
-		m_Dart->Throw(m_pCameraMngr->GetForward());
+		m_Dart->Throw(m_pCameraMngr->GetForward(), m_DartForce);
+		m_DartForce = 0;
 		break;
 	case sf::Mouse::Button::Middle:
 		gui.m_bMousePressed[1] = false;
@@ -142,15 +143,15 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		break;
 	case sf::Keyboard::M:
 		InitBalloonManager(
-			10, // number of rows
+			15, // number of rows
 			vector3(0.0f, -1.0f, -7.5f), // center of rows
 			-AXIS_Z, // forward vector
 			AXIS_X, // right vector
 			3.0f, // spacing between rows
-			50.0f, // length of lines
-			20.0f, // maximum height a balloon can reach before despawning
+			60.0f, // length of lines
+			30.0f, // maximum height a balloon can reach before despawning
 			5000, // maximum number of balloons
-			5 // ms per balloon spawn
+			4 // ms per balloon spawn
 		);
 		break;
 	case sf::Keyboard::LShift:

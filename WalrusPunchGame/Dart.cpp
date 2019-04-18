@@ -37,11 +37,11 @@ MyEntity * Dart::GetEntity()
 	return m_pEntityMngr->GetEntity(m_pEntityMngr->GetEntityIndex("Dart"));
 }
 
-void Dart::Throw(vector3 a_v3Forward)
+void Dart::Throw(vector3 a_v3Forward, float a_fThrowForce)
 {
 	if (!m_bThrown)
 	{
-		m_fThrowForce = .2f;
+		m_fThrowForce = a_fThrowForce;
 		m_v3Velocity = a_v3Forward * m_fThrowForce;
 		m_bThrown = true;
 	}
