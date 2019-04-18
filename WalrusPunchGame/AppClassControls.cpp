@@ -143,7 +143,7 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		break;
 	case sf::Keyboard::M:
 		InitBalloonManager(
-			15, // number of rows
+			20, // number of rows
 			vector3(0.0f, -1.0f, -7.5f), // center of rows
 			-AXIS_Z, // forward vector
 			AXIS_X, // right vector

@@ -74,7 +74,7 @@ void Application::InitBalloonManager
 		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) +
 		(glm::cross(BalloonRowsForwardVector, BalloonRowsRightVector) * -1.0f * (balloonMaxHeight / 2.0f));
 	// Calculate the necessary size of the octree based on the balloon manager parameters and add some padding in case balloons drift out
-	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f) + 10.0f;
+	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f) + 5.0f;
 }
 void Application::Update(void)
 {
