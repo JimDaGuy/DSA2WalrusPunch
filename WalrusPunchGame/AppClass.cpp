@@ -70,8 +70,8 @@ void Application::InitBalloonManager
 	m_OctreeCenter = balloonRowFrontCenter +
 		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) +
 		(glm::cross(BalloonRowsForwardVector, BalloonRowsRightVector) * -1.0f * (balloonMaxHeight / 2.0f));
-	// Calculate the necessary size of the octree based on the balloon manager parameters
-	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f);
+	// Calculate the necessary size of the octree based on the balloon manager parameters and add some padding in case balloons drift out
+	m_OctreeHalfWidth = max(max(balloonRowLength / 2.0f, balloonMaxHeight / 2.0f), ((balloonRowCount - 1) * balloonRowSpacing) / 2.0f) + 10.0f;
 }
 void Application::Update(void)
 {
@@ -92,7 +92,7 @@ void Application::Update(void)
 	// Have dart follow camera if it has not been thrown and handle flight if it has been
 	if (!m_Dart->m_bThrown)
 	{
-		m_Dart->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f);
+		m_Dart->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f + glm::cross(m_pCameraMngr->GetForward(), m_pCameraMngr->GetRightward())  * 0.75f);
 	}
 	else
 	{
@@ -100,7 +100,7 @@ void Application::Update(void)
 	}
 
 	// Respawn dart if below y = 0
-	if (m_Dart->GetPosition().y < 0)
+	if (m_Dart->GetPosition().y < -2.0f)
 	{
 		m_Dart->Respawn();
 	}

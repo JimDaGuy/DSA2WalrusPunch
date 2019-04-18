@@ -26,6 +26,6 @@ private:
 	MeshManager* m_pMeshMngr = nullptr;
 	MyEntityManager* m_pEntityMngr = nullptr;
 	vector3 m_v3Position;
-	vector3 m_v3Forward;
+	vector3 m_v3Velocity;
 };
 

@@ -42,19 +42,18 @@ void Dart::Throw(vector3 a_v3Forward)
 	if (!m_bThrown)
 	{
 		m_fThrowForce = .2f;
-		m_v3Forward = a_v3Forward;
+		m_v3Velocity = a_v3Forward * m_fThrowForce;
 		m_bThrown = true;
 	}
 }
 
 void Dart::HandleFlight(uint a_deltaMS)
 {
-	if (m_fThrowForce > 0)
-	{
-		m_fThrowForce -= .001f;
-	}
-	m_v3Position = m_v3Position + m_v3Forward * m_fThrowForce;
-	m_v3Position = m_v3Position - vector3(0.0f, .05f, 0.0f);
+	float speedMultiplier = a_deltaMS / 10.0f;
+
+	m_v3Velocity.y -= .0015f * speedMultiplier;
+
+	m_v3Position = m_v3Position + m_v3Velocity * speedMultiplier;
 	MoveTo(m_v3Position);
 }
 
