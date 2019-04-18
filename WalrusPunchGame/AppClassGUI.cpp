@@ -40,7 +40,7 @@ void Application::DrawGUI(void)
 				ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
 			ImGui::Text("Levels in Octree: %d\n", m_uOctantLevels);
 			//ImGui::Text("Octants: %d\n", m_pRoot->GetOctantCount());
-			ImGui::Text("Objects: %d\n", m_uObjects);
+			ImGui::Text("Balloons: %d\n", m_uObjects);
 			ImGui::Separator();
 			ImGui::Text("Control:\n");
 			ImGui::Text("   WASD: Movement\n");

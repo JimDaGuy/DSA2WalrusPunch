@@ -20,13 +20,7 @@ void Application::InitVariables(void)
 
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
 
-#ifdef DEBUG
-	uint uInstances = 900;
-#else
-	uint uInstances = 1849;
-#endif
-	int nSquare = static_cast<int>(std::sqrt(uInstances));
-	m_uObjects = nSquare * nSquare;
+	m_uObjects = 0;
 
 	InitBalloonManager();
 	m_Dart = new Dart(vector3(0));
@@ -91,6 +85,8 @@ void Application::Update(void)
 
 	//Is the first person camera active?
 	CameraRotation();
+
+	m_uObjects = Balloon::BalloonCount;
 
 	// Have dart follow camera if it has not been thrown and handle flight if it has been
 	if (!m_Dart->m_bThrown)

@@ -31,6 +31,7 @@ public:
 	void setMovingLeft(bool left);
 	float getHorizontalSpeed();
 	BalloonColor color;
+	static uint BalloonCount;
 private:
 	static int IdIterator;
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton

@@ -150,7 +150,7 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			3.0f, // spacing between rows
 			60.0f, // length of lines
 			40.0f, // maximum height a balloon can reach before despawning
-			10000, // maximum number of balloons
+			1200, // maximum number of balloons
 			50, // ms per balloon spawn
 			3 // balloons per spawn
 		);

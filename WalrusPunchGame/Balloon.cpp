@@ -1,10 +1,12 @@
 #include "Balloon.h"
 
 int Balloon::IdIterator = -1;
+uint Balloon::BalloonCount = 0;
 
 Balloon::Balloon(vector3 a_position, BalloonColor a_color, uint a_row)
 {
 	++IdIterator;
+	++BalloonCount;
 
 	color = a_color;
 
@@ -57,6 +59,7 @@ Balloon::~Balloon()
 	m_pEntityMngr->RemoveEntity(m_pEntityMngr->GetEntityIndex(m_uniqueID));
 	m_pMeshMngr = nullptr;
 	m_pEntityMngr = nullptr;
+	--BalloonCount;
 }
 
 void Balloon::MoveTo(vector3 position)
