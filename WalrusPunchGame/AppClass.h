@@ -144,7 +144,8 @@ private:
 		float balloonRowLength = 15.0f,
 		float balloonMaxHeight = 7.5f,
 		uint balloonMaxCount = 10,
-		uint msPerBalloonSpawn = 500
+		uint msPerBalloonSpawn = 500,
+		uint a_balloonsPerSpawn = 1
 	);
 	/*
 	USAGE: Reads the configuration of the application to a file

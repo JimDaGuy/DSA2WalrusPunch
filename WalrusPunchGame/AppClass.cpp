@@ -47,7 +47,8 @@ void Application::InitBalloonManager
 	float balloonRowLength,
 	float balloonMaxHeight,
 	uint balloonMaxCount,
-	uint msPerBalloonSpawn
+	uint msPerBalloonSpawn,
+	uint balloonsPerSpawn
 )
 {
 	SafeDelete(m_pRoot);
@@ -62,7 +63,8 @@ void Application::InitBalloonManager
 		balloonRowLength, // length of lines
 		balloonMaxHeight, // maximum height a balloon can reach before despawning
 		balloonMaxCount, // maximum number of balloons
-		msPerBalloonSpawn // ms per balloon spawn
+		msPerBalloonSpawn, // ms per balloon spawn
+		balloonsPerSpawn // number of balloons per spawn
 	);
 
 	// Reset octant levels, otherwise program will break
@@ -112,7 +114,7 @@ void Application::Update(void)
 	}
 
 	// recreate the octree every 20 ms
-	if (currentTime - m_lastOctreeUpdateTime > 10) {
+	if (currentTime - m_lastOctreeUpdateTime > 20) {
 		m_lastOctreeUpdateTime = currentTime;
 
 		// Recreate the octree as the balloons have moved

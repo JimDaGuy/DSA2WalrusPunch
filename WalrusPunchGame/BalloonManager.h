@@ -22,7 +22,8 @@ public:
 		float a_lineLength = 15.0f,
 		float a_maxHeight = 7.5f,
 		uint a_balloonMax = 10,
-		uint a_msPerBalloonSpawn = 500
+		uint a_msPerBalloonSpawn = 500,
+		uint a_balloonsPerSpawn = 1
 	);
 	void Update(uint a_deltaMS);
 	void DisplayLines(vector3 a_color);
@@ -50,6 +51,8 @@ private:
 	uint balloonMax;
 	// Milliseconds between each balloon spawn (if the limit has not been hit)
 	uint msPerBalloonSpawn;
+	// Timestamp is ms from last balloon spawn
+	uint balloonsPerSpawn;
 	// Timestamp is ms from last balloon spawn
 	uint lastBalloonSpawn;
 	// Weights for random gen, highest to lowest

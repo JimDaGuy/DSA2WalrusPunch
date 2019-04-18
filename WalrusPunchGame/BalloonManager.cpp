@@ -12,7 +12,8 @@ BalloonManager::BalloonManager
 	float a_lineLength,
 	float a_maxHeight,
 	uint a_balloonMax,
-	uint a_msPerBalloonSpawn
+	uint a_msPerBalloonSpawn,
+	uint a_balloonsPerSpawn
 )
 {
 	// Set values
@@ -25,6 +26,8 @@ BalloonManager::BalloonManager
 	maxHeight = a_maxHeight;
 	balloonMax = a_balloonMax;
 	msPerBalloonSpawn = a_msPerBalloonSpawn;
+	balloonsPerSpawn = a_balloonsPerSpawn;
+
 	// msSinceLastBalloonSpawn = 0;
 	srand(time(NULL));
 
@@ -146,40 +149,42 @@ void BalloonManager::Update(uint a_deltaMS)
 	// And if the current number of balloons is less than the max
 	if (currentTime >= msPerBalloonSpawn + lastBalloonSpawn && balloonCount < balloonMax) {
 		// Generate position for new balloon
-		uint lineNum = rand() % lines; // Random line num
+		for (int i = 0; i < balloonsPerSpawn; ++i) {
+			uint lineNum = rand() % lines; // Random line num
 
-		// Borrowed this line for generating floats within a range from a stack overflow post
-		// https://stackoverflow.com/questions/686353/random-float-number-generation
-		float linePosFloat = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / lineLength)) - (lineLength / 2.0f); // Random float along line
+			// Borrowed this line for generating floats within a range from a stack overflow post
+			// https://stackoverflow.com/questions/686353/random-float-number-generation
+			float linePosFloat = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / lineLength)) - (lineLength / 2.0f); // Random float along line
 
-		// Start at first line center
-		vector3 balloonPosition = lineCenter;
-		// Push pos to the correct line
-		vector3 forwardOffset = glm::normalize(forwardVec) * spaceBetweenLines * lineNum;
-		balloonPosition += forwardOffset;
-		// Push pos to correct spot on the line
-		vector3 rightwardOffset = glm::normalize(rightwardVec) * linePosFloat;
-		balloonPosition += rightwardOffset;
+			// Start at first line center
+			vector3 balloonPosition = lineCenter;
+			// Push pos to the correct line
+			vector3 forwardOffset = glm::normalize(forwardVec) * spaceBetweenLines * lineNum;
+			balloonPosition += forwardOffset;
+			// Push pos to correct spot on the line
+			vector3 rightwardOffset = glm::normalize(rightwardVec) * linePosFloat;
+			balloonPosition += rightwardOffset;
 
-		// Create balloon
-		uint ranNum = WeightedRandom();
+			// Create balloon
+			uint ranNum = WeightedRandom();
 
-		switch (ranNum) {
-		case 1: //Blue
-			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
-			break;
-		case 2: //Red
-			CreateBalloon(Balloon::BalloonColor::Red, balloonPosition, lineNum);
-			break;
-		case 3: //Green
-			CreateBalloon(Balloon::BalloonColor::Green, balloonPosition, lineNum);
-			break;
-		case 4: //Gold
-			CreateBalloon(Balloon::BalloonColor::Gold, balloonPosition, lineNum);
-			break;
-		default:
-			CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
-			break;
+			switch (ranNum) {
+			case 1: //Blue
+				CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
+				break;
+			case 2: //Red
+				CreateBalloon(Balloon::BalloonColor::Red, balloonPosition, lineNum);
+				break;
+			case 3: //Green
+				CreateBalloon(Balloon::BalloonColor::Green, balloonPosition, lineNum);
+				break;
+			case 4: //Gold
+				CreateBalloon(Balloon::BalloonColor::Gold, balloonPosition, lineNum);
+				break;
+			default:
+				CreateBalloon(Balloon::BalloonColor::Blue, balloonPosition, lineNum);
+				break;
+			}
 		}
 
 		// Reset timer
