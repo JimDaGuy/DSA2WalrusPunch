@@ -149,9 +149,9 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			AXIS_X, // right vector
 			3.0f, // spacing between rows
 			60.0f, // length of lines
-			30.0f, // maximum height a balloon can reach before despawning
-			5000, // maximum number of balloons
-			4 // ms per balloon spawn
+			80.0f, // maximum height a balloon can reach before despawning
+			10000, // maximum number of balloons
+			30 // ms per balloon spawn
 		);
 		break;
 	case sf::Keyboard::LShift:
