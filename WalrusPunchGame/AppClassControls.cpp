@@ -415,9 +415,9 @@ void Application::CameraRotation(float a_fSpeed)
 
 
 	// Restrict camera movement
-	float xRotUpperBound = -2.5f;
+	float xRotUpperBound = -1.6f;
 	float xRotLowerBound = 0.5f;
-	float yRotBound = 2.0f;
+	float yRotBound = 1.6f;
 
 	xCameraRot += fAngleX;
 	yCameraRot += fAngleY;

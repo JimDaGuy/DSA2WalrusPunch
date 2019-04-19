@@ -145,10 +145,10 @@ private:
 		vector3 BalloonRowsForwardVector = -AXIS_Z,
 		vector3 BalloonRowsRightVector = AXIS_X,
 		float balloonRowSpacing = 3.0f,
-		float balloonRowLength = 15.0f,
-		float balloonMaxHeight = 7.5f,
-		uint balloonMaxCount = 10,
-		uint msPerBalloonSpawn = 500,
+		float balloonRowLength = 20.0f,
+		float balloonMaxHeight = 20.0f,
+		uint balloonMaxCount = 100,
+		uint msPerBalloonSpawn = 400,
 		uint a_balloonsPerSpawn = 1
 	);
 	/*

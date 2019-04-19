@@ -14,8 +14,8 @@ void Application::InitVariables(void)
 
 	//Set the position and target of the camera
 	m_pCameraMngr->SetPositionTargetAndUpward(
-		vector3(0.0f, 3.0f, 8.0f), //Position
-		vector3(0.0f, 0.0f, -1.0f),	//Target
+		vector3(0.0f, 8.0f, 15.0f), //Position
+		vector3(0.0f, 8.0f, -1.0f),	//Target
 		AXIS_Y);					//Up
 
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
@@ -101,7 +101,7 @@ void Application::Update(void)
 		// If the mouse is held down, increase the dart force
 		if (gui.m_bMousePressed[0] == true) {
 			m_DartForce += deltaMS * .0005f;
-			m_DartForce = min(m_DartForce, 0.3f);
+			m_DartForce = min(m_DartForce, 0.4f);
 		}
 		m_Darts.back()->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f + glm::cross(m_pCameraMngr->GetForward(), m_pCameraMngr->GetRightward())  * 0.75f);
 	}
