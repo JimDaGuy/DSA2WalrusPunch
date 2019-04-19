@@ -39,7 +39,11 @@ void Application::ProcessMouseReleased(sf::Event a_event)
 	default: break;
 	case sf::Mouse::Button::Left:
 		gui.m_bMousePressed[0] = false;
-		m_Dart->Throw(m_pCameraMngr->GetForward(), m_DartForce);
+		if (m_Darts.size() > 0 && !m_Darts.back()->m_bThrown)
+		{
+			m_Darts.back()->Throw(m_pCameraMngr->GetForward(), m_DartForce);
+			m_lastDartThrowTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
+		}
 		m_DartForce = 0;
 		break;
 	case sf::Mouse::Button::Middle:

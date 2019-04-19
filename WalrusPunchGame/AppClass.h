@@ -28,8 +28,8 @@ class Application
 	float m_OctreeHalfWidth; //Half width of the octree
 	MyOctree* m_pRoot = nullptr;
 	BalloonManager* m_BalloonMngr = nullptr;
-	Dart* m_Dart = nullptr;
 	float m_DartForce = 0;
+	std::vector<Dart*> m_Darts;
 	
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer
@@ -67,6 +67,7 @@ private:
 
 	uint m_lastTime = 0; // Last update time in MS
 	uint m_lastOctreeUpdateTime = 0; // Last time the octree was recreated in MS
+	uint m_lastDartThrowTime = 0;
 
 	sf::SoundBuffer m_soundBuffer; //buffer to play sound from
 	sf::Sound m_sound; //sound effect

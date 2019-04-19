@@ -20,12 +20,13 @@ public:
 	vector3 GetPosition();
 	float m_fThrowForce;
 
-
 private:
 
+	static int IdIterator;
 	MeshManager* m_pMeshMngr = nullptr;
 	MyEntityManager* m_pEntityMngr = nullptr;
 	vector3 m_v3Position;
 	vector3 m_v3Velocity;
+	std::string m_uniqueID;
 };
 

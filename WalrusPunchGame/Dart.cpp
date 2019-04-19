@@ -1,11 +1,19 @@
 #include "Dart.h"
 
+int Dart::IdIterator = -1;
+
+
 Dart::Dart(vector3 a_position)
 {
+	++IdIterator;
+
 	m_pMeshMngr = MeshManager::GetInstance();
 	m_pEntityMngr = MyEntityManager::GetInstance();
 
-	m_pEntityMngr->AddEntity("Dart\\Dart.obj", "Dart", -1);
+	std::string idPrefix = "Dart";
+	m_uniqueID = idPrefix + std::to_string(IdIterator);
+
+	m_pEntityMngr->AddEntity("Dart\\Dart.obj", m_uniqueID, -1);
 	m_bThrown = false;
 
 	m_v3Position = a_position;
@@ -15,8 +23,9 @@ Dart::Dart(vector3 a_position)
 
 Dart::~Dart()
 {
-
-
+	m_pEntityMngr->RemoveEntity(m_pEntityMngr->GetEntityIndex(m_uniqueID));
+	m_pMeshMngr = nullptr;
+	m_pEntityMngr = nullptr;
 }
 
 void Dart::FollowCamera(vector3 a_position)
@@ -34,7 +43,7 @@ void Dart::MoveTo(vector3 a_position)
 
 MyEntity * Dart::GetEntity()
 {
-	return m_pEntityMngr->GetEntity(m_pEntityMngr->GetEntityIndex("Dart"));
+	return m_pEntityMngr->GetEntity(m_pEntityMngr->GetEntityIndex(m_uniqueID));
 }
 
 void Dart::Throw(vector3 a_v3Forward, float a_fThrowForce)
@@ -66,7 +75,6 @@ vector3 Dart::GetPosition()
 {
 	return m_v3Position;
 }
-
 
 
 

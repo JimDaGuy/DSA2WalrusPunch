@@ -23,7 +23,7 @@ void Application::InitVariables(void)
 	m_uObjects = 0;
 
 	InitBalloonManager();
-	m_Dart = new Dart(vector3(0));
+	m_Darts.push_back(new Dart(ZERO_V3));
 
 	m_uOctantID = 0;
 	m_uOctantLevels = 3; 
@@ -86,27 +86,41 @@ void Application::Update(void)
 	//Is the first person camera active?
 	CameraRotation();
 
+	// Set the balloon count display
 	m_uObjects = Balloon::BalloonCount;
 
+	// Respawn the dart .5 seconds after it was thrown
+	if ((m_Darts.size() < 1 || m_Darts.back()->m_bThrown) && currentTime - m_lastDartThrowTime > 500) {
+		m_Darts.push_back(new Dart(ZERO_V3));
+		m_lastDartThrowTime = currentTime;
+	}
+
 	// Have dart follow camera if it has not been thrown and handle flight if it has been
-	if (!m_Dart->m_bThrown)
+	if (m_Darts.size() > 0 && !m_Darts.back()->m_bThrown)
 	{
 		// If the mouse is held down, increase the dart force
 		if (gui.m_bMousePressed[0] == true) {
-			m_DartForce += deltaMS * .0004f;
+			m_DartForce += deltaMS * .0005f;
 			m_DartForce = min(m_DartForce, 0.3f);
 		}
-		m_Dart->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f + glm::cross(m_pCameraMngr->GetForward(), m_pCameraMngr->GetRightward())  * 0.75f);
-	}
-	else
-	{
-		m_Dart->HandleFlight(deltaMS);
+		m_Darts.back()->FollowCamera(m_pCameraMngr->GetPosition() + m_pCameraMngr->GetForward() * 1.5f + glm::cross(m_pCameraMngr->GetForward(), m_pCameraMngr->GetRightward())  * 0.75f);
 	}
 
-	// Respawn dart if below y = 0
-	if (m_Dart->GetPosition().y < -2.0f)
-	{
-		m_Dart->Respawn();
+	for (std::vector<Dart*>::iterator it = m_Darts.begin(); it != m_Darts.end(); /* Iterating internally */) {
+		if ((*it)->m_bThrown)
+		{
+			(*it)->HandleFlight(deltaMS);
+		}
+
+		// Respawn dart if below y = 0
+		if ((*it)->GetPosition().y < -10.0f)
+		{
+			SafeDelete(*it);
+			it = m_Darts.erase(it);
+		}
+		else {
+			++it;
+		}
 	}
 
 	// recreate the octree every 20 ms
