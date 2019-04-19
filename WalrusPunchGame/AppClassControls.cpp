@@ -22,7 +22,7 @@ void Application::ProcessMousePressed(sf::Event a_event)
 		break;
 	case sf::Mouse::Button::Middle:
 		gui.m_bMousePressed[1] = true;
-		m_bArcBall = true;
+		//m_bArcBall = true;
 		break;
 	case sf::Mouse::Button::Right:
 		gui.m_bMousePressed[2] = true;
@@ -48,7 +48,7 @@ void Application::ProcessMouseReleased(sf::Event a_event)
 		break;
 	case sf::Mouse::Button::Middle:
 		gui.m_bMousePressed[1] = false;
-		m_bArcBall = false;
+		//m_bArcBall = false;
 		break;
 	case sf::Mouse::Button::Right:
 		gui.m_bMousePressed[2] = false;
@@ -412,6 +412,34 @@ void Application::CameraRotation(float a_fSpeed)
 		fDeltaMouse = static_cast<float>(MouseY - CenterY);
 		fAngleX += fDeltaMouse * a_fSpeed;
 	}
+
+
+	// Restrict camera movement
+	float xRotUpperBound = -2.5f;
+	float xRotLowerBound = 0.5f;
+	float yRotBound = 2.0f;
+
+	xCameraRot += fAngleX;
+	yCameraRot += fAngleY;
+
+	if (xCameraRot > xRotLowerBound) {
+		fAngleX = fAngleX - (xCameraRot - xRotLowerBound);
+		xCameraRot = xRotLowerBound;
+	}
+	else if (xCameraRot < xRotUpperBound) {
+		fAngleX = fAngleX - (xCameraRot - xRotUpperBound);
+		xCameraRot = xRotUpperBound;
+	}
+
+	if (yCameraRot > yRotBound) {
+		fAngleY = fAngleY - (yCameraRot - yRotBound);
+		yCameraRot = yRotBound;
+	}
+	else if (yCameraRot < -yRotBound) {
+		fAngleY = fAngleY - (yCameraRot + yRotBound);
+		yCameraRot = -yRotBound;
+	}
+
 	//Change the Yaw and the Pitch of the camera
 	m_pCameraMngr->ChangeYaw(fAngleY * 0.25f);
 	m_pCameraMngr->ChangePitch(-fAngleX * 0.25f);
