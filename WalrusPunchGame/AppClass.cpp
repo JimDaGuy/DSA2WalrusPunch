@@ -14,11 +14,13 @@ void Application::InitVariables(void)
 
 	//Set the position and target of the camera
 	m_pCameraMngr->SetPositionTargetAndUpward(
-		vector3(0.0f, 8.0f, 15.0f), //Position
+		vector3(0.0f, 8.0f, 20.0f), //Position
 		vector3(0.0f, 8.0f, -1.0f),	//Target
 		AXIS_Y);					//Up
 
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
+
+	PlaySound("Data\\Audio\\elementary-wave-11.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
 
 	m_uObjects = 0;
 
