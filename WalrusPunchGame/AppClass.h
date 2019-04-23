@@ -30,6 +30,7 @@ class Application
 	BalloonManager* m_BalloonMngr = nullptr;
 	float m_DartForce = 0;
 	std::vector<Dart*> m_Darts;
+	MyEntity* tent;
 	
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer

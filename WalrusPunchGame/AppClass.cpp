@@ -20,7 +20,7 @@ void Application::InitVariables(void)
 
 	m_pLightMngr->SetPosition(vector3(0.0f, 3.0f, 13.0f), 1); //set the position of first light (0 is reserved for ambient light)
 
-	PlaySound("Data\\Audio\\elementary-wave-11.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
+	//PlaySound("Data\\Audio\\elementary-wave-11.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
 
 	m_uObjects = 0;
 
@@ -32,6 +32,9 @@ void Application::InitVariables(void)
 
 	m_lastTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count()); 
 	m_lastOctreeUpdateTime = 0;
+
+	tent = new MyEntity("Tent\\Tent.obj", "Tent", -1);
+	
 }
 void Application::InitBalloonManager
 (
@@ -151,6 +154,7 @@ void Application::Update(void)
 	if (m_BalloonMngr != nullptr)
 		m_BalloonMngr->Update(deltaMS);
 
+	tent->AddToRenderList();
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);
 }
