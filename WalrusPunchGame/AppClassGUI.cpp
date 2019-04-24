@@ -23,7 +23,7 @@ void Application::DrawGUI(void)
 
 	//Calculate the window size to know how to draw
 	NewFrame();
-
+	
 	static ImVec4 v4Color = ImColor(255, 0, 0);
 	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
 	//Main Window
@@ -41,13 +41,13 @@ void Application::DrawGUI(void)
 			ImGui::Text("Levels in Octree: %d\n", m_uOctantLevels);
 			//ImGui::Text("Octants: %d\n", m_pRoot->GetOctantCount());
 			ImGui::Text("Balloons: %d\n", m_uObjects);
+			ImGui::Text("Score: %d\n", m_BalloonMngr->score);
+			ImGui::Text("Power: %d\n", m_DartForce);
 			ImGui::Separator();
 			ImGui::Text("Control:\n");
-			ImGui::Text("   WASD: Movement\n");
-			ImGui::Text("	 F1: Perspective\n");
-			ImGui::Text("	 F2: Orthographic X\n");
-			ImGui::Text("	 F3: Orthographic Y\n");
-			ImGui::Text("	 F4: Orthographic Z\n");
+			ImGui::Text("   Look Around: Move mouse\n");
+			ImGui::Text("   Charge Dart: Hold Left Click\n");
+			ImGui::Text("   Throw Dart: Release Left Click\n");
 			ImGui::Separator();
 			ImGui::Text(" PageUp: Enable Octant display\n");
 			ImGui::Text(" PageDw: Disable Octant display\n");

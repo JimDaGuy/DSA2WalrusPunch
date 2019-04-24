@@ -27,6 +27,7 @@ BalloonManager::BalloonManager
 	balloonMax = a_balloonMax;
 	msPerBalloonSpawn = a_msPerBalloonSpawn;
 	balloonsPerSpawn = a_balloonsPerSpawn;
+	score = 0;
 
 	// msSinceLastBalloonSpawn = 0;
 	srand(time(NULL));
@@ -47,6 +48,11 @@ BalloonManager::~BalloonManager()
 	delete[] balloonList;
 	m_pMeshMngr = nullptr;
 	m_pEntityMngr = nullptr;
+}
+
+uint BalloonManager::getScore()
+{
+	return score;
 }
 
 void BalloonManager::Update(uint a_deltaMS)

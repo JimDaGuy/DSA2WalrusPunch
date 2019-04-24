@@ -31,7 +31,10 @@ public:
 	void DestroyBalloon(uint a_balloonIndex);
 	uint WeightedRandom();
 	~BalloonManager();
-	uint score = 0;
+	uint score;
+	//Return score
+	uint getScore();
+
 private:
 	// Number of lines to be generated
 	uint lines;
@@ -57,7 +60,7 @@ private:
 	uint lastBalloonSpawn;
 	// Weights for random gen, highest to lowest
 	std::vector<uint> weights = { 7, 4, 3, 1 };
-
+	
 	typedef MyRigidBody* PRigidBody; //Entity Pointer
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton
