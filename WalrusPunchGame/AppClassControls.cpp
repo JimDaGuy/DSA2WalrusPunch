@@ -43,6 +43,7 @@ void Application::ProcessMouseReleased(sf::Event a_event)
 		{
 			m_Darts.back()->Throw(m_pCameraMngr->GetForward(), m_DartForce);
 			m_lastDartThrowTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
+			m_soundDart.play();
 		}
 		m_DartForce = 0;
 		break;
@@ -76,7 +77,6 @@ void Application::ProcessKeyPressed(sf::Event a_event)
 	{
 	default: break;
 	case sf::Keyboard::Space:
-		m_sound.play();
 		break;
 	case sf::Keyboard::LShift:
 	case sf::Keyboard::RShift:

@@ -73,8 +73,11 @@ private:
 	uint m_lastOctreeUpdateTime = 0; // Last time the octree was recreated in MS
 	uint m_lastDartThrowTime = 0;
 
+	String sRoute;
 	sf::SoundBuffer m_soundBuffer; //buffer to play sound from
-	sf::Sound m_sound; //sound effect
+	sf::SoundBuffer m_soundBuffer2; //buffer to play sound from
+	sf::Sound m_soundDart; //sound effect
+	sf::Sound m_soundBalloon; //sound effect
 	sf::Music m_soundBGM; //background music
 
 public:

@@ -14,6 +14,7 @@ uint balloonCount = 0;
 public:
 	BalloonManager
 	(
+		sf::Sound a_soundBalloon,
 		uint a_lines = 4,
 		vector3 a_lineCenter = vector3(0.0f),
 		vector3 a_forwardVec = -AXIS_Z,
@@ -32,6 +33,7 @@ public:
 	uint WeightedRandom();
 	~BalloonManager();
 	uint score = 0;
+	sf::Sound soundBalloon; //sound effect
 private:
 	// Number of lines to be generated
 	uint lines;
