@@ -52,10 +52,6 @@ BalloonManager::~BalloonManager()
 	m_pEntityMngr = nullptr;
 }
 
-uint BalloonManager::getScore()
-{
-	return score;
-}
 
 void BalloonManager::Update(uint a_deltaMS)
 {
@@ -113,7 +109,7 @@ void BalloonManager::Update(uint a_deltaMS)
 						score += 10;
 						break;
 					default:
-						score += 1;
+						score += 0;
 						break;
 					}
 
