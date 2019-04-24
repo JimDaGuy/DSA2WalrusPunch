@@ -42,7 +42,7 @@ void Application::DrawGUI(void)
 			//ImGui::Text("Octants: %d\n", m_pRoot->GetOctantCount());
 			ImGui::Text("Balloons: %d\n", m_uObjects);
 			ImGui::Text("Score: %d\n", m_BalloonMngr->score / 2);
-			ImGui::Text("Power: %d\n", m_DartForce);
+			//ImGui::Text("Power: %d\n", m_DartForce);
 			ImGui::Separator();
 			ImGui::Text("Control:\n");
 			ImGui::Text("   Look Around: Move mouse\n");
