@@ -14,6 +14,7 @@ uint balloonCount = 0;
 public:
 	BalloonManager
 	(
+		sf::Sound a_soundBalloon,
 		uint a_lines = 4,
 		vector3 a_lineCenter = vector3(0.0f),
 		vector3 a_forwardVec = -AXIS_Z,
@@ -31,10 +32,8 @@ public:
 	void DestroyBalloon(uint a_balloonIndex);
 	uint WeightedRandom();
 	~BalloonManager();
-	uint score;
-	//Return score
-	uint getScore();
-
+	uint score = 0;
+	sf::Sound soundBalloon; //sound effect
 private:
 	// Number of lines to be generated
 	uint lines;
@@ -60,7 +59,7 @@ private:
 	uint lastBalloonSpawn;
 	// Weights for random gen, highest to lowest
 	std::vector<uint> weights = { 7, 4, 3, 1 };
-	
+
 	typedef MyRigidBody* PRigidBody; //Entity Pointer
 	MeshManager* m_pMeshMngr = nullptr;//Mesh Manager singleton
 	MyEntityManager* m_pEntityMngr = nullptr; //Entity Manager Singleton

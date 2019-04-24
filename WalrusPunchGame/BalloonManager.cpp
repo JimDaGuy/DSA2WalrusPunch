@@ -4,6 +4,7 @@
 
 BalloonManager::BalloonManager
 (
+	sf::Sound a_soundBalloon,
 	uint a_lines,
 	vector3 a_lineCenter,
 	vector3 a_forwardVec,
@@ -17,6 +18,7 @@ BalloonManager::BalloonManager
 )
 {
 	// Set values
+	soundBalloon = a_soundBalloon;
 	lines = a_lines;
 	lineCenter = a_lineCenter;
 	forwardVec = a_forwardVec;
@@ -94,6 +96,8 @@ void BalloonManager::Update(uint a_deltaMS)
 				//If the ID contains "Dart" destroy this balloon and increment score.
 				if (collidingList[x]->m_uniqueID.find("Dart") != String::npos)
 				{
+					// Play balloon sound
+					soundBalloon.play();
 					switch (current->color)
 					{
 					case Balloon::BalloonColor::Red:

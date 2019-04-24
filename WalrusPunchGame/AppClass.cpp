@@ -24,9 +24,6 @@ void Application::InitVariables(void)
 
 	m_uObjects = 0;
 
-	InitBalloonManager();
-	m_Darts.push_back(new Dart(ZERO_V3));
-
 	m_uOctantID = 0;
 	m_uOctantLevels = 3; 
 
@@ -35,6 +32,23 @@ void Application::InitVariables(void)
 
 	tent = new MyEntity("Tent\\Tent.obj", "Tent", -1);
 	
+	sRoute = m_pSystem->m_pFolder->GetFolderData();
+	sRoute += m_pSystem->m_pFolder->GetFolderAudio();
+
+	m_soundBGM.openFromFile(sRoute + "elementary-wave-11.ogg");
+	m_soundBGM.play();
+	m_soundBGM.setLoop(true);
+
+	//Balloon sound effect
+	m_soundBuffer.loadFromFile(sRoute + "Balloon.wav");
+	m_soundBalloon.setBuffer(m_soundBuffer);
+
+	//Dart sound effect
+	m_soundBuffer2.loadFromFile(sRoute + "whoosh.wav");
+	m_soundDart.setBuffer(m_soundBuffer2);
+
+	InitBalloonManager();
+	m_Darts.push_back(new Dart(ZERO_V3));
 }
 void Application::InitBalloonManager
 (
@@ -54,6 +68,7 @@ void Application::InitBalloonManager
 	SafeDelete(m_BalloonMngr);
 
 	m_BalloonMngr = new BalloonManager(
+		m_soundBalloon,
 		balloonRowCount, // number of rows
 		balloonRowFrontCenter, // center of rows
 		BalloonRowsForwardVector, // forward vector
