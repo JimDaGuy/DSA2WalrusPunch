@@ -169,7 +169,9 @@ void Application::Update(void)
 	if (m_BalloonMngr != nullptr)
 		m_BalloonMngr->Update(deltaMS);
 
-	tent->AddToRenderList();
+	if (m_showTent)
+		tent->AddToRenderList();
+
 	//Add objects to render list
 	m_pEntityMngr->AddEntityToRenderList(-1, true);
 }

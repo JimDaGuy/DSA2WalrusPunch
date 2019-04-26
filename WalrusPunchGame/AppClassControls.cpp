@@ -143,9 +143,11 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		}
 		break;
 	case sf::Keyboard::N:
+		m_showTent = true;
 		InitBalloonManager();
 		break;
 	case sf::Keyboard::M:
+		m_showTent = false;
 		InitBalloonManager(
 			20, // number of rows
 			vector3(0.0f, -1.0f, -7.5f), // center of rows
@@ -455,6 +457,8 @@ void Application::ProcessKeyboard(void)
 	for discreet on/off use ProcessKeyboardPressed/Released
 	*/
 #pragma region Camera Position
+	/* Camera Movement Disabled */
+	/*
 	bool bMultiplier = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::RShift);
 
@@ -480,6 +484,7 @@ void Application::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		m_pCameraMngr->MoveVertical(m_fMovementSpeed * fMultiplier);
+	*/
 #pragma endregion
 }
 //Joystick

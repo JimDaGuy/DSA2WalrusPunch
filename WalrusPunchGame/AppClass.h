@@ -31,6 +31,7 @@ class Application
 	float m_DartForce = 0;
 	std::vector<Dart*> m_Darts;
 	MyEntity* tent;
+	boolean m_showTent = true;
 	
 private:
 	String m_sProgrammer = "Walrus Punch"; //programmer
