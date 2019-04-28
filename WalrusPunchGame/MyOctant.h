@@ -6,7 +6,7 @@ using namespace Simplex;
 class MyOctant
 {
 public:
-	MyOctant(uint a_level = 1, uint a_subdivisionThreshold = 8, vector3 a_halfWidth = vector3(35.0f), vector3 a_center = vector3(0.0f));
+	MyOctant(uint a_level = 1, uint a_subdivisionThreshold = 24, vector3 a_halfWidth = vector3(35.0f), vector3 a_center = vector3(0.0f));
 	~MyOctant();
 	uint GetLevel();
 	uint GetSubdivisionThreshold();

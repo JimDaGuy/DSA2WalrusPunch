@@ -38,10 +38,10 @@ void Application::DrawGUI(void)
 			ImGui::TextColored(v4Color, m_sProgrammer.c_str());
 			ImGui::Text("FrameRate: %.2f [FPS] -> %.3f [ms/frame]\n",
 				ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
-			ImGui::Text("Levels in Octree: %d\n", m_uOctantLevels);
+			ImGui::Text("Max Octree Levels: %d\n", m_uOctantLevels);
 			//ImGui::Text("Octants: %d\n", m_pRoot->GetOctantCount());
 			ImGui::Text("Balloons: %d\n", m_uObjects);
-			ImGui::Text("Score: %d\n", m_BalloonMngr->score / 2);
+			ImGui::Text("Score: %d\n", m_BalloonMngr->score);
 			//ImGui::Text("Power: %d\n", m_DartForce);
 			ImGui::Separator();
 			ImGui::Text("Control:\n");
@@ -49,11 +49,11 @@ void Application::DrawGUI(void)
 			ImGui::Text("   Charge Dart: Hold Left Click\n");
 			ImGui::Text("   Throw Dart: Release Left Click\n");
 			ImGui::Separator();
-			ImGui::Text(" PageUp: Enable Octant display\n");
-			ImGui::Text(" PageDw: Disable Octant display\n");
+			ImGui::Text(" PageUp: Enable Octree display\n");
+			ImGui::Text(" PageDw: Disable Octree display\n");
 			ImGui::Separator();
-			ImGui::Text("	  Y: Increment Octree subdivision\n");
-			ImGui::Text("	  U: Decrement Octree subdivision\n");
+			ImGui::Text("	  Y: Enable Octree\n");
+			ImGui::Text("	  U: Disable Octree\n");
 			ImGui::Separator();
 			ImGui::Text("	  N: Normal Mode\n");
 			ImGui::Text("	  M: Mad Mode (octree stress test)\n");

@@ -8,7 +8,7 @@ MyOctree::MyOctree(uint a_octreeLevels, float a_halfWidth, vector3 a_center)
 	// center of octree
 	octreeCenter = a_center;
 	// Arbitrary int for threshold of subdivision
-	subdivisionThreshold = 8;
+	subdivisionThreshold = 24;
 
 	mMeshMngr = MeshManager::GetInstance();
 	mEntityMngr = MyEntityManager::GetInstance();

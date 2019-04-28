@@ -92,6 +92,10 @@ void BalloonManager::Update(uint a_deltaMS)
 				//If the ID contains "Dart" destroy this balloon and increment score.
 				if (collidingList[x]->m_uniqueID.find("Dart") != String::npos)
 				{
+					auto balloonPos = vector3(current->GetEntity()->GetModelMatrix()[3]);
+					if (balloonPos.y > maxHeight * 2)
+						continue;
+
 					// Play balloon sound
 					soundBalloon.play();
 					switch (current->color)
@@ -115,6 +119,7 @@ void BalloonManager::Update(uint a_deltaMS)
 
 					//Destroy the balloon by moving it above the max height
 					currentPos.y += (maxHeight * 3);
+					currentPos.z += (maxHeight * 3);
 					break;
 				}
 				else

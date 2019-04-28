@@ -25,7 +25,7 @@ void Application::InitVariables(void)
 	m_uObjects = 0;
 
 	m_uOctantID = 0;
-	m_uOctantLevels = 3; 
+	m_uOctantLevels = 4; 
 
 	m_lastTime = static_cast <uint>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count()); 
 	m_lastOctreeUpdateTime = 0;
@@ -82,7 +82,7 @@ void Application::InitBalloonManager
 	);
 
 	// Reset octant levels, otherwise program will break
-	m_uOctantLevels = 3;
+	m_uOctantLevels = 4;
 	// Calculate the center of the octree based on the balloon manager parameters
 	m_OctreeCenter = balloonRowFrontCenter +
 		(BalloonRowsForwardVector * (((balloonRowCount - 1) * balloonRowSpacing) / 2.0f)) +

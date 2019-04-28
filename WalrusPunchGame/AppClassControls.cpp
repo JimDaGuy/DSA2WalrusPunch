@@ -126,21 +126,12 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 		m_uOctantID = 0;
 		break;
 	case sf::Keyboard::Y:
-		if (m_uOctantLevels < 5)
-		{
-			m_pEntityMngr->ClearDimensionSetAll();
-			++m_uOctantLevels;
-		}
+		m_pEntityMngr->ClearDimensionSetAll();
+		m_uOctantLevels = 4;
 		break;
 	case sf::Keyboard::U:
-		if (m_uOctantLevels > 1)
-		{
-			m_pEntityMngr->ClearDimensionSetAll();
-			--m_uOctantLevels;
-		}
-		else {
-			m_uOctantLevels = 0;
-		}
+		m_pEntityMngr->ClearDimensionSetAll();
+		m_uOctantLevels = 0;
 		break;
 	case sf::Keyboard::N:
 		m_showTent = true;
@@ -155,8 +146,8 @@ void Application::ProcessKeyReleased(sf::Event a_event)
 			AXIS_X, // right vector
 			3.0f, // spacing between rows
 			60.0f, // length of lines
-			40.0f, // maximum height a balloon can reach before despawning
-			1200, // maximum number of balloons
+			45.0f, // maximum height a balloon can reach before despawning
+			1100, // maximum number of balloons
 			50, // ms per balloon spawn
 			3 // balloons per spawn
 		);
